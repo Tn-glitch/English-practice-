@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài Kiểm Tra Trình Độ CEFR (Placement Test) | EduMaster English</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 500: '#6366f1', 600: '#4f46e5' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-[#f7f8f6] dark:bg-[#111722] text-slate-800 dark:text-slate-100 flex flex-col min-h-screen">
+
+  <header id="main-header"></header>
+
+  <main class="flex-grow py-8 sm:py-12">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8" id="test-container">
+
+      <!-- Header with description -->
+      <div class="text-center mb-8">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 text-xs font-bold mb-3">
+          ⚡ Chuẩn Khung Châu Âu CEFR
+        </span>
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-2">
+          Bài Kiểm Tra Đánh Giá Năng Lực Đầu Vào
+        </h1>
+        <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm max-w-lg mx-auto">
+          15 câu hỏi trắc nghiệm từ cấp độ A1 đến C2. Kết quả sẽ giúp gợi ý cấp độ xuất phát chuẩn xác nhất cho bạn.
+        </p>
+      </div>
+
+      <!-- Live Progress Bar -->
+      <div class="mb-6">
+        <div class="flex items-center justify-between text-xs font-bold text-slate-500 dark:text-slate-400 mb-2">
+          <span id="question-counter">Câu hỏi 1 / 15</span>
+          <span>Tiến độ bài thi</span>
+        </div>
+        <div class="w-full bg-slate-200 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
+          <div id="test-progress-bar" class="bg-indigo-600 h-full rounded-full transition-all duration-300" style="width: 6%;"></div>
+        </div>
+      </div>
+
+      <!-- Interactive Question Card Container -->
+      <div id="test-content">
+        <!-- Được inject bởi assets/js/test.js -->
+        <div class="p-8 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
+          <p class="text-slate-400">Đang tải đề thi...</p>
+        </div>
+      </div>
+
+      <!-- Quick Tips notice -->
+      <div class="mt-8 p-4 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-100 dark:border-indigo-900/40 flex items-start gap-3 text-xs text-slate-500 dark:text-slate-400">
+        <span class="text-indigo-600 text-base">💡</span>
+        <p>
+          <strong>Mẹo:</strong> Bạn có thể nhấn vào biểu tượng chiếc loa bên cạnh mỗi câu hỏi để nghe phát âm giọng bản xứ của câu đó. Hãy làm bài trung thực để nhận kết quả đánh giá khách quan nhất!
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer id="main-footer"></footer>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/audio.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/test.js"></script>
+</body>
+</html>

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="vi" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tra Cứu Từ Vựng Chuẩn CEFR | EduMaster English</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 500: '#6366f1', 600: '#4f46e5' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-[#f7f8f6] dark:bg-[#111722] text-slate-800 dark:text-slate-100 flex flex-col min-h-screen">
+
+  <header id="main-header"></header>
+
+  <main class="flex-grow py-8 sm:py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Page Header -->
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold mb-3 border border-indigo-200/60 dark:border-indigo-800/60">
+          📖 Kho Từ Điển Đa Cấp Độ
+        </span>
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white mb-3">
+          Tra Cứu Từ Vựng Thông Minh
+        </h1>
+        <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-base leading-relaxed">
+          Tra cứu nghĩa tiếng Việt, phiên âm quốc tế IPA, các cụm từ đi kèm (Collocations), từ đồng nghĩa và phát âm chuẩn bản ngữ cho từng cấp độ CEFR.
+        </p>
+      </div>
+
+      <!-- Word of the Day / Discovery Banner -->
+      <div class="bg-gradient-to-r from-emerald-800 via-teal-800 to-indigo-900 text-white p-6 sm:p-8 rounded-3xl mb-10 shadow-lg shadow-teal-900/10 border border-white/10" id="word-of-the-day-card">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Search & Filters Container -->
+      <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm mb-8 space-y-4">
+        
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          <!-- Search box with online lookup trigger -->
+          <div class="relative w-full md:w-96">
+            <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+              🔍
+            </span>
+            <input 
+              type="text" 
+              id="vocab-search" 
+              placeholder="Nhập bất kỳ từ tiếng Anh hoặc tiếng Việt..." 
+              oninput="filterDictionary()"
+              onkeydown="if(event.key === 'Enter') triggerExternalSearch()"
+              class="w-full pl-11 pr-10 py-3.5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:border-indigo-600 focus:outline-none transition-colors"
+            />
+            <button onclick="clearSearch()" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-sm" title="Xóa tìm kiếm">
+              ✕
+            </button>
+          </div>
+
+          <!-- Buttons: Global Search & Favorites & Counter -->
+          <div class="flex items-center gap-2.5 w-full md:w-auto justify-between md:justify-end flex-wrap">
+            <button 
+              onclick="triggerExternalSearch()" 
+              class="px-4 py-3 rounded-2xl bg-indigo-600 text-white font-bold text-xs flex items-center gap-1.5 hover:bg-indigo-700 shadow-md shadow-indigo-600/20 transition-all"
+              title="Tra cứu từ điển quốc tế trực tuyến (hàng trăm ngàn từ vựng)">
+              <span>🌐 Tra từ điển thế giới</span>
+            </button>
+
+            <button 
+              onclick="toggleFavoritesOnly()" 
+              id="btn-favorites-filter"
+              class="px-4 py-3 rounded-2xl border border-amber-300 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-200 text-xs font-bold flex items-center gap-1.5 transition-colors">
+              <span>⭐ Sổ tay từ đã lưu</span>
+              <span id="fav-count-badge" class="px-1.5 py-0.5 rounded-full bg-amber-200 dark:bg-amber-900 text-amber-900 dark:text-amber-100 text-[10px]">0</span>
+            </button>
+
+            <div class="text-xs font-bold text-slate-400 dark:text-slate-500 whitespace-nowrap">
+              Tìm thấy: <span id="dict-count" class="text-indigo-600 dark:text-indigo-400 font-extrabold text-sm">0</span> từ
+            </div>
+          </div>
+        </div>
+
+        <!-- Level Filter Tabs -->
+        <div class="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none text-xs font-bold">
+          <span class="text-slate-400 mr-1 whitespace-nowrap">Cấp độ:</span>
+          <button onclick="setLevelFilter('ALL')" id="lvl-btn-ALL" class="lvl-filter-btn px-3.5 py-1.5 rounded-xl bg-indigo-600 text-white transition-all">
+            Tất cả
+          </button>
+          <button onclick="setLevelFilter('A1')" id="lvl-btn-A1" class="lvl-filter-btn px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-all">
+            A1 (Căn bản)
+          </button>
+          <button onclick="setLevelFilter('A2')" id="lvl-btn-A2" class="lvl-filter-btn px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-all">
+            A2 (Sơ cấp)
+          </button>
+          <button onclick="setLevelFilter('B1')" id="lvl-btn-B1" class="lvl-filter-btn px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-all">
+            B1 (Trung cấp)
+          </button>
+          <button onclick="setLevelFilter('B2')" id="lvl-btn-B2" class="lvl-filter-btn px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-all">
+            B2 (Trung cấp cao)
+          </button>
+          <button onclick="setLevelFilter('C1')" id="lvl-btn-C1" class="lvl-filter-btn px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-all">
+            C1 (Nâng cao)
+          </button>
+          <button onclick="setLevelFilter('C2')" id="lvl-btn-C2" class="lvl-filter-btn px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-all">
+            C2 (Thành thạo)
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Live External Lookup Result Area (Nếu người dùng tra từ bên ngoài) -->
+      <div id="external-result-box" class="hidden mb-8">
+        <!-- Rendered dynamically when looking up external words -->
+      </div>
+
+      <!-- Dictionary Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16" id="dictionary-grid">
+        <!-- Rendered dynamically -->
+      </div>
+
+    </div>
+  </main>
+
+  <footer id="main-footer"></footer>
+
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/audio.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/dictionary-data.js"></script>
+  <script>
+    let activeLevelFilter = 'ALL';
+    let onlyFavorites = false;
+    let savedBookmarks = JSON.parse(localStorage.getItem('SAVED_VOCAB_BOOKMARKS') || '[]');
+    let savedExternalWords = JSON.parse(localStorage.getItem('SAVED_EXTERNAL_WORDS') || '[]');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderWordOfTheDay();
+      updateBookmarkStats();
+      filterDictionary();
+    });
+
+    function getAllWords() {
+      // Kết hợp từ điển nội bộ và các từ bên ngoài đã được lưu
+      const map = new Map();
+      if (window.DICTIONARY_WORDS) {
+        window.DICTIONARY_WORDS.forEach(w => map.set(w.word.toLowerCase(), w));
+      }
+      if (savedExternalWords && Array.isArray(savedExternalWords)) {
+        savedExternalWords.forEach(w => {
+          if (!map.has(w.word.toLowerCase())) {
+            map.set(w.word.toLowerCase(), w);
+          }
+        });
+      }
+      return Array.from(map.values());
+    }
+
+    function updateBookmarkStats() {
+      const badge = document.getElementById('fav-count-badge');
+      if (badge) badge.textContent = savedBookmarks.length;
+    }
+
+    function toggleBookmark(word, wordObj = null) {
+      const cleanWord = word.trim();
+      if (savedBookmarks.includes(cleanWord)) {
+        savedBookmarks = savedBookmarks.filter(w => w !== cleanWord);
+        savedExternalWords = savedExternalWords.filter(w => w.word.toLowerCase() !== cleanWord.toLowerCase());
+        window.showToast(`Đã xóa "${cleanWord}" khỏi sổ tay từ vựng!`, 'info');
+      } else {
+        savedBookmarks.push(cleanWord);
+        if (wordObj) {
+          if (!savedExternalWords.some(w => w.word.toLowerCase() === cleanWord.toLowerCase())) {
+            savedExternalWords.push(wordObj);
+          }
+        }
+        window.showToast(`Đã lưu "${cleanWord}" vào sổ tay từ vựng ⭐`, 'success');
+        if (window.appStorage) window.appStorage.addXP(5);
+        if (typeof updateHeaderStats === 'function') updateHeaderStats();
+      }
+      localStorage.setItem('SAVED_VOCAB_BOOKMARKS', JSON.stringify(savedBookmarks));
+      localStorage.setItem('SAVED_EXTERNAL_WORDS', JSON.stringify(savedExternalWords));
+      updateBookmarkStats();
+      filterDictionary();
+    }
+
+    function isBookmarked(word) {
+      return savedBookmarks.includes(word.trim());
+    }
+
+    function toggleFavoritesOnly() {
+      onlyFavorites = !onlyFavorites;
+      const btn = document.getElementById('btn-favorites-filter');
+      if (btn) {
+        if (onlyFavorites) {
+          btn.classList.add('bg-amber-400', 'text-amber-950', 'border-amber-500');
+          btn.classList.remove('bg-amber-50', 'text-amber-900');
+        } else {
+          btn.classList.remove('bg-amber-400', 'text-amber-950', 'border-amber-500');
+          btn.classList.add('bg-amber-50', 'text-amber-900');
+        }
+      }
+      filterDictionary();
+    }
+
+    function setLevelFilter(lvl) {
+      activeLevelFilter = lvl;
+      document.querySelectorAll('.lvl-filter-btn').forEach(btn => {
+        btn.classList.remove('bg-indigo-600', 'text-white');
+        btn.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+      });
+      const activeBtn = document.getElementById(`lvl-btn-${lvl}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-indigo-600', 'text-white');
+        activeBtn.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+      }
+      filterDictionary();
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('vocab-search');
+      if (input) input.value = '';
+      closeExternalBox();
+      filterDictionary();
+    }
+
+    function closeExternalBox() {
+      const box = document.getElementById('external-result-box');
+      if (box) {
+        box.classList.add('hidden');
+        box.innerHTML = '';
+      }
+    }
+
+    function renderWordOfTheDay() {
+      const card = document.getElementById('word-of-the-day-card');
+      if (!card || !window.DICTIONARY_WORDS || window.DICTIONARY_WORDS.length === 0) return;
+
+      const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+      const w = window.DICTIONARY_WORDS[dayOfYear % window.DICTIONARY_WORDS.length];
+
+      card.innerHTML = `
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div class="max-w-2xl">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-400 text-amber-950 font-extrabold text-[11px] uppercase tracking-wider">
+                🌟 Từ vựng nổi bật mỗi ngày
+              </span>
+              <span class="text-xs text-teal-200 font-semibold">${w.level} • ${w.topic}</span>
+            </div>
+            
+            <div class="flex items-center gap-3 flex-wrap mt-2">
+              <h3 class="text-3xl sm:text-4xl font-extrabold tracking-tight">${w.word}</h3>
+              <span class="text-sm font-mono text-teal-200 bg-white/10 px-2.5 py-1 rounded-lg">${w.ipa}</span>
+              <span class="text-xs italic text-teal-300">(${w.pos})</span>
+              <button onclick="playPronounce('${w.word.replace(/'/g, "\\'")}', false, this)" class="p-2 rounded-xl bg-white/20 hover:bg-white/30 text-white transition-colors" title="Nghe phát âm chuẩn">
+                🔊
+              </button>
+            </div>
+
+            <p class="text-lg font-semibold text-amber-300 mt-2">${w.meaning}</p>
+            <p class="text-sm text-slate-200 italic mt-1">"${w.example}"</p>
+            <p class="text-xs text-teal-200 mt-0.5">Dịch: ${w.exampleVi}</p>
+          </div>
+
+          <div class="flex md:flex-col gap-2 w-full md:w-auto justify-end">
+            <button onclick="toggleBookmark('${w.word.replace(/'/g, "\\'")}')" class="px-5 py-2.5 rounded-2xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors">
+              <span>${isBookmarked(w.word) ? '⭐ Đã lưu' : '☆ Lưu từ này'}</span>
+            </button>
+            <button onclick="renderWordOfTheDay()" class="px-5 py-2.5 rounded-2xl bg-white text-teal-900 font-bold text-xs hover:bg-teal-50 transition-colors">
+              Khám phá từ khác 🎲
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function filterDictionary() {
+      const container = document.getElementById('dictionary-grid');
+      const countEl = document.getElementById('dict-count');
+      if (!container) return;
+
+      const allWords = getAllWords();
+      const query = (document.getElementById('vocab-search')?.value || '').trim().toLowerCase();
+
+      const filtered = allWords.filter(w => {
+        const matchLevel = (activeLevelFilter === 'ALL' || w.level === activeLevelFilter);
+        const matchFavorite = (!onlyFavorites || isBookmarked(w.word));
+        const matchQuery = !query || 
+          w.word.toLowerCase().includes(query) || 
+          (w.meaning && w.meaning.toLowerCase().includes(query)) || 
+          (w.topic && w.topic.toLowerCase().includes(query)) ||
+          (w.synonyms && w.synonyms.some(s => s.toLowerCase().includes(query)));
+        
+        return matchLevel && matchFavorite && matchQuery;
+      });
+
+      if (countEl) countEl.textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        if (query) {
+          container.innerHTML = `
+            <div class="col-span-full py-12 px-6 text-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+              <span class="text-5xl block mb-3">🌐</span>
+              <h4 class="font-extrabold text-slate-800 dark:text-slate-100 text-xl mb-2">Chưa có trong bộ từ vựng cơ bản</h4>
+              <p class="text-slate-500 dark:text-slate-400 text-sm max-w-lg mx-auto mb-6">
+                Từ <strong class="text-indigo-600 dark:text-indigo-400">"${query}"</strong> có thể nằm trong kho từ vựng mở rộng hoặc từ điển quốc tế. Nhấn nút bên dưới để tra cứu trực tuyến không giới hạn!
+              </p>
+              <button 
+                onclick="triggerExternalSearch('${query.replace(/'/g, "\\'")}')" 
+                class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-lg shadow-indigo-600/30 transition-all hover:scale-105">
+                <span>🌐 Tra từ điển thế giới cho "${query}"</span>
+              </button>
+            </div>
+          `;
+        } else {
+          container.innerHTML = `
+            <div class="col-span-full py-16 text-center bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8">
+              <span class="text-4xl block mb-2">🔍</span>
+              <h4 class="font-bold text-slate-800 dark:text-slate-200 text-lg mb-1">Không tìm thấy từ vựng phù hợp</h4>
+              <p class="text-slate-400 text-xs sm:text-sm">Hãy thử tìm với từ khóa khác hoặc tắt bộ lọc cấp độ.</p>
+            </div>
+          `;
+        }
+        return;
+      }
+
+      const levelColors = {
+        A1: 'bg-blue-100 text-blue-800 dark:bg-blue-900/60 dark:text-blue-300',
+        A2: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300',
+        B1: 'bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-300',
+        B2: 'bg-purple-100 text-purple-800 dark:bg-purple-900/60 dark:text-purple-300',
+        C1: 'bg-pink-100 text-pink-800 dark:bg-pink-900/60 dark:text-pink-300',
+        C2: 'bg-red-100 text-red-800 dark:bg-red-900/60 dark:text-red-300',
+        EXT: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/60 dark:text-indigo-300'
+      };
+
+      container.innerHTML = filtered.map(w => {
+        const bookmarked = isBookmarked(w.word);
+        const lvl = w.level || 'EXT';
+        return `
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div>
+              <!-- Top Row: Tags & Bookmark Button -->
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[11px] font-extrabold px-2.5 py-0.5 rounded-md ${levelColors[lvl] || 'bg-slate-100 text-slate-800'}">
+                    ${lvl}
+                  </span>
+                  <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">
+                    ${w.topic || 'Từ vựng'}
+                  </span>
+                </div>
+                <button 
+                  onclick="toggleBookmark('${w.word.replace(/'/g, "\\'")}', ${JSON.stringify(w).replace(/"/g, '&quot;')})" 
+                  class="text-base p-1 transition-transform hover:scale-125" 
+                  title="${bookmarked ? 'Bỏ lưu' : 'Lưu vào sổ tay'}">
+                  ${bookmarked ? '⭐' : '☆'}
+                </button>
+              </div>
+
+              <!-- Word, IPA & Audio -->
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <div>
+                  <h3 class="text-xl font-bold text-slate-900 dark:text-white leading-tight">${w.word}</h3>
+                  <div class="flex items-center gap-2 mt-0.5">
+                    <span class="text-xs font-mono text-indigo-600 dark:text-indigo-400">${w.ipa || ''}</span>
+                    <span class="text-xs italic text-slate-400">(${w.pos || 'word'})</span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-1">
+                  <button 
+                    onclick="playPronounce('${w.word.replace(/'/g, "\\'")}', false, this)" 
+                    class="p-2 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-300 hover:scale-105 transition-transform" 
+                    title="Nghe chuẩn 1.0x">
+                    🔊
+                  </button>
+                  <button 
+                    onclick="playPronounce('${w.word.replace(/'/g, "\\'")}', true, this)" 
+                    class="px-2 py-1 text-[11px] font-semibold rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 hover:text-indigo-600 transition-colors" 
+                    title="Nghe chậm 0.7x">
+                    0.7x
+                  </button>
+                </div>
+              </div>
+
+              <!-- Meaning -->
+              <p class="text-sm font-bold text-slate-700 dark:text-slate-200 mb-3">${w.meaning}</p>
+
+              <!-- Example Sentence -->
+              ${w.example ? `
+              <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 text-xs mb-4">
+                <p class="italic text-slate-600 dark:text-slate-300">"${w.example}"</p>
+                ${w.exampleVi ? `<p class="text-slate-400 mt-1">${w.exampleVi}</p>` : ''}
+              </div>
+              ` : ''}
+            </div>
+
+            <!-- Collocations & Synonyms Footer -->
+            <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-wrap gap-1.5 text-[11px]">
+              ${w.collocations && w.collocations.length > 0 ? w.collocations.map(c => `
+                <span class="px-2 py-0.5 rounded bg-indigo-50/60 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 font-medium">
+                  + ${c}
+                </span>
+              `).join('') : ''}
+              ${w.synonyms && w.synonyms.length > 0 ? w.synonyms.map(s => `
+                <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 font-medium">
+                  ≈ ${s}
+                </span>
+              `).join('') : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /* ========================================================
+     * TÍNH NĂNG TRA TỪ ĐIỂN THẾ GIỚI TRỰC TUYẾN (API NGOẠI BỘ)
+     * ======================================================== */
+
+    function triggerExternalSearch(customWord = null) {
+      const searchInput = document.getElementById('vocab-search');
+      let targetWord = customWord || (searchInput ? searchInput.value.trim() : '');
+      if (!targetWord) {
+        if (window.showToast) window.showToast('Vui lòng nhập từ bạn muốn tra cứu!', 'warning');
+        if (searchInput) searchInput.focus();
+        return;
+      }
+      if (searchInput && customWord) {
+        searchInput.value = customWord;
+      }
+      lookupExternalWord(targetWord);
+    }
+
+    async function lookupExternalWord(word) {
+      const box = document.getElementById('external-result-box');
+      if (!box) return;
+
+      const cleanWord = word.trim();
+
+      // Mở hộp và hiển thị trạng thái đang tra cứu
+      box.classList.remove('hidden');
+      box.innerHTML = `
+        <div class="bg-white dark:bg-slate-900 border-2 border-indigo-500/40 dark:border-indigo-500/30 rounded-3xl p-6 sm:p-8 shadow-xl shadow-indigo-600/10 animate-pulse">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold text-xs uppercase tracking-wider">
+              <span class="inline-block w-2.5 h-2.5 rounded-full bg-indigo-600 animate-ping"></span>
+              Đang kết nối từ điển quốc tế & dịch nghĩa...
+            </div>
+            <button onclick="closeExternalBox()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-sm font-bold">✕ Đóng</button>
+          </div>
+          <div class="h-8 bg-slate-200 dark:bg-slate-800 rounded-xl w-48 mb-3"></div>
+          <div class="h-4 bg-slate-200 dark:bg-slate-800 rounded-lg w-72 mb-4"></div>
+          <div class="h-16 bg-slate-100 dark:bg-slate-800/60 rounded-2xl w-full"></div>
+        </div>
+      `;
+      box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      try {
+        // Gọi song song cả Free Dictionary API và MyMemory Translation API
+        const dictPromise = fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(cleanWord)}`)
+          .then(res => res.ok ? res.json() : null)
+          .catch(() => null);
+
+        const transPromise = fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(cleanWord)}&langpair=en|vi`)
+          .then(res => res.ok ? res.json() : null)
+          .catch(() => null);
+
+        const [dictResult, transResult] = await Promise.all([dictPromise, transPromise]);
+
+        // Lấy nghĩa tiếng Việt
+        let viTranslation = '';
+        if (transResult && transResult.responseData && transResult.responseData.translatedText) {
+          const rawTrans = transResult.responseData.translatedText;
+          if (rawTrans.toLowerCase() !== cleanWord.toLowerCase()) {
+            viTranslation = rawTrans;
+          }
+        }
+
+        // Nếu từ điển quốc tế tìm thấy từ
+        if (dictResult && Array.isArray(dictResult) && dictResult.length > 0) {
+          renderExternalSuccess(cleanWord, dictResult[0], viTranslation);
+        } else if (viTranslation) {
+          // Trường hợp không có trong Free Dictionary (ví dụ cụm từ, tiếng Việt hoặc thành ngữ), nhưng có bản dịch nghĩa
+          renderExternalTranslationOnly(cleanWord, viTranslation);
+        } else {
+          renderExternalNotFound(cleanWord);
+        }
+
+      } catch (err) {
+        console.error('Lỗi khi tra từ điển trực tuyến:', err);
+        renderExternalNotFound(cleanWord);
+      }
+    }
+
+    function renderExternalSuccess(word, entry, viTranslation) {
+      const box = document.getElementById('external-result-box');
+      if (!box) return;
+
+      // Tìm phát âm IPA và audio mp3
+      let ipa = entry.phonetic || '';
+      let audioUrl = '';
+      if (entry.phonetics && Array.isArray(entry.phonetics)) {
+        for (const p of entry.phonetics) {
+          if (!ipa && p.text) ipa = p.text;
+          if (!audioUrl && p.audio && p.audio.startsWith('http')) audioUrl = p.audio;
+        }
+      }
+
+      // Chuẩn bị đối tượng để bookmark
+      const firstMeaning = entry.meanings?.[0]?.definitions?.[0]?.definition || '';
+      const firstExample = entry.meanings?.[0]?.definitions?.[0]?.example || '';
+      const firstPos = entry.meanings?.[0]?.partOfSpeech || 'word';
+
+      const wordObj = {
+        word: entry.word || word,
+        ipa: ipa || '/.../',
+        pos: firstPos,
+        level: 'EXT',
+        meaning: viTranslation || firstMeaning,
+        example: firstExample || `They studied the word "${word}".`,
+        exampleVi: viTranslation ? `Nghĩa: ${viTranslation}` : 'Từ điển mở rộng quốc tế',
+        topic: 'Tra cứu thế giới',
+        collocations: [],
+        synonyms: (entry.meanings?.[0]?.synonyms || []).slice(0, 3)
+      };
+
+      const bookmarked = isBookmarked(entry.word || word);
+
+      box.innerHTML = `
+        <div class="bg-gradient-to-br from-indigo-900 via-slate-900 to-teal-950 text-white rounded-3xl p-6 sm:p-8 border border-indigo-500/40 shadow-2xl shadow-indigo-950/50">
+          
+          <!-- Top Row: Badge & Action Controls -->
+          <div class="flex items-center justify-between mb-4 border-b border-white/10 pb-4">
+            <div class="flex items-center gap-2">
+              <span class="px-3 py-1 rounded-full bg-indigo-500 text-white font-extrabold text-[11px] uppercase tracking-wider flex items-center gap-1.5">
+                <span>🌐 Từ điển Quốc tế & Tra cứu Toàn cầu</span>
+              </span>
+              <span class="text-xs text-teal-300 font-semibold hidden sm:inline">Nguồn: Oxford / Webster / FreeDictionary</span>
+            </div>
+            <button onclick="closeExternalBox()" class="text-slate-400 hover:text-white text-xs font-bold px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 transition-all">
+              ✕ Đóng
+            </button>
+          </div>
+
+          <!-- Main Word Presentation -->
+          <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
+            <div>
+              <div class="flex items-center gap-3 flex-wrap">
+                <h3 class="text-3xl sm:text-4xl font-black text-white tracking-tight">${entry.word}</h3>
+                ${ipa ? `<span class="text-base font-mono text-teal-300 bg-white/10 px-3 py-1 rounded-xl">${ipa}</span>` : ''}
+              </div>
+
+              ${viTranslation ? `
+                <div class="mt-2.5 flex items-center gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">Dịch tiếng Việt</span>
+                  <p class="text-xl sm:text-2xl font-bold text-amber-300">${viTranslation}</p>
+                </div>
+              ` : ''}
+            </div>
+
+            <div class="flex items-center gap-2 flex-wrap">
+              <!-- Nút nghe phát âm chuẩn (ưu tiên audio MP3 bản ngữ, fallback Web Speech) -->
+              <button 
+                onclick="playGlobalPronounce('${(entry.word || word).replace(/'/g, "\\'")}', '${audioUrl}', false, this)" 
+                class="px-4 py-2.5 rounded-2xl bg-teal-500 hover:bg-teal-600 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-teal-500/20 transition-transform hover:scale-105"
+                title="Nghe phát âm chuẩn giọng người bản xứ">
+                <span>🔊 Nghe bản xứ</span>
+              </button>
+              <button 
+                onclick="playGlobalPronounce('${(entry.word || word).replace(/'/g, "\\'")}', '', true, this)" 
+                class="px-3 py-2.5 rounded-2xl bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-bold transition-all"
+                title="Nghe tốc độ chậm">
+                0.7x
+              </button>
+              
+              <!-- Nút Lưu vào Sổ tay -->
+              <button 
+                id="btn-bookmark-external"
+                onclick="toggleBookmark('${(entry.word || word).replace(/'/g, "\\'")}', ${JSON.stringify(wordObj).replace(/"/g, '&quot;')}); updateExternalBookmarkBtn('${(entry.word || word).replace(/'/g, "\\'")}')" 
+                class="px-4 py-2.5 rounded-2xl ${bookmarked ? 'bg-amber-400 text-amber-950' : 'bg-white/10 text-white hover:bg-white/20'} font-bold text-xs flex items-center gap-1.5 transition-all">
+                <span>${bookmarked ? '⭐ Đã lưu vào sổ tay' : '☆ Lưu vào sổ tay'}</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Meanings & Definitions by Parts of Speech -->
+          <div class="space-y-4 pt-4 border-t border-white/10">
+            <h4 class="text-xs uppercase font-extrabold text-slate-400 tracking-wider">Các lớp nghĩa chi tiết (English Definitions):</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              ${(entry.meanings || []).slice(0, 4).map(m => `
+                <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
+                  <span class="inline-block px-2.5 py-0.5 rounded-md bg-indigo-500/30 text-indigo-300 font-extrabold text-xs uppercase tracking-wide mb-2">
+                    ${m.partOfSpeech}
+                  </span>
+                  <ul class="space-y-2.5 text-xs text-slate-200">
+                    ${(m.definitions || []).slice(0, 2).map((d, idx) => `
+                      <li class="pl-3 border-l-2 border-indigo-400">
+                        <p class="font-medium text-slate-100">${idx + 1}. ${d.definition}</p>
+                        ${d.example ? `<p class="italic text-teal-200/90 mt-0.5">"${d.example}"</p>` : ''}
+                      </li>
+                    `).join('')}
+                  </ul>
+                  ${m.synonyms && m.synonyms.length > 0 ? `
+                    <div class="mt-3 pt-2 border-t border-white/5 flex flex-wrap gap-1 text-[11px] text-slate-400">
+                      <span class="text-slate-400 font-bold">Đồng nghĩa:</span>
+                      ${m.synonyms.slice(0, 4).map(s => `
+                        <span class="text-teal-300 bg-white/5 px-2 py-0.5 rounded cursor-pointer hover:underline" onclick="triggerExternalSearch('${s.replace(/'/g, "\\'")}')">${s}</span>
+                      `).join('')}
+                    </div>
+                  ` : ''}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+        </div>
+      `;
+    }
+
+    function renderExternalTranslationOnly(word, viTranslation) {
+      const box = document.getElementById('external-result-box');
+      if (!box) return;
+
+      const wordObj = {
+        word: word,
+        ipa: '/.../',
+        pos: 'phrase',
+        level: 'EXT',
+        meaning: viTranslation,
+        example: `I looked up "${word}".`,
+        exampleVi: `Dịch nghĩa: ${viTranslation}`,
+        topic: 'Tra cứu thế giới',
+        collocations: [],
+        synonyms: []
+      };
+
+      const bookmarked = isBookmarked(word);
+
+      box.innerHTML = `
+        <div class="bg-gradient-to-br from-indigo-900 via-slate-900 to-teal-950 text-white rounded-3xl p-6 sm:p-8 border border-indigo-500/40 shadow-2xl">
+          <div class="flex items-center justify-between mb-4 border-b border-white/10 pb-4">
+            <span class="px-3 py-1 rounded-full bg-teal-500 text-white font-extrabold text-[11px] uppercase tracking-wider">
+              🌐 Dịch nghĩa Trực tuyến
+            </span>
+            <button onclick="closeExternalBox()" class="text-slate-400 hover:text-white text-xs font-bold px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 transition-all">✕ Đóng</button>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <h3 class="text-3xl font-extrabold text-white">${word}</h3>
+              <p class="text-xl font-bold text-amber-300 mt-2">${viTranslation}</p>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="playPronounce('${word.replace(/'/g, "\\'")}', false, this)" class="px-4 py-2.5 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-md">
+                🔊 Nghe phát âm
+              </button>
+              <button onclick="toggleBookmark('${word.replace(/'/g, "\\'")}', ${JSON.stringify(wordObj).replace(/"/g, '&quot;')}); updateExternalBookmarkBtn('${word.replace(/'/g, "\\'")}')" class="px-4 py-2.5 rounded-2xl ${bookmarked ? 'bg-amber-400 text-amber-950' : 'bg-white/10 text-white'} font-bold text-xs">
+                ${bookmarked ? '⭐ Đã lưu' : '☆ Lưu từ này'}
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderExternalNotFound(word) {
+      const box = document.getElementById('external-result-box');
+      if (!box) return;
+
+      box.innerHTML = `
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 text-center shadow-sm">
+          <span class="text-4xl block mb-2">🤔</span>
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 text-lg mb-1">Không tìm thấy từ "${word}" trên hệ thống từ điển quốc tế</h4>
+          <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm max-w-md mx-auto mb-4">
+            Vui lòng kiểm tra lại chính tả (ví dụ dạng từ nguyên mẫu không chia đuôi -ing, -ed) hoặc thử một từ tiếng Anh khác.
+          </p>
+          <button onclick="closeExternalBox()" class="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 text-xs font-bold transition-all">
+            ✕ Đóng thông báo
+          </button>
+        </div>
+      `;
+    }
+
+    function updateExternalBookmarkBtn(word) {
+      const btn = document.getElementById('btn-bookmark-external');
+      if (btn) {
+        const bookmarked = isBookmarked(word);
+        btn.className = `px-4 py-2.5 rounded-2xl ${bookmarked ? 'bg-amber-400 text-amber-950' : 'bg-white/10 text-white hover:bg-white/20'} font-bold text-xs flex items-center gap-1.5 transition-all`;
+        btn.innerHTML = `<span>${bookmarked ? '⭐ Đã lưu vào sổ tay' : '☆ Lưu vào sổ tay'}</span>`;
+      }
+    }
+
+    function playGlobalPronounce(word, audioUrl, isSlow, btn) {
+      if (audioUrl && !isSlow) {
+        if (btn) btn.classList.add('animate-pulse');
+        const audio = new Audio(audioUrl);
+        audio.onended = () => { if (btn) btn.classList.remove('animate-pulse'); };
+        audio.onerror = () => { playPronounce(word, false, btn); };
+        audio.play().catch(() => { playPronounce(word, false, btn); });
+      } else {
+        playPronounce(word, isSlow, btn);
+      }
+    }
+  </script>
+</body>
+</html>

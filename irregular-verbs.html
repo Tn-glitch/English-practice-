@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="vi" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bảng Động Từ Bất Quy Tắc (V1 - V2 - V3) | EduMaster English</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 500: '#6366f1', 600: '#4f46e5' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-[#f7f8f6] dark:bg-[#111722] text-slate-800 dark:text-slate-100 flex flex-col min-h-screen">
+
+  <header id="main-header"></header>
+
+  <main class="flex-grow py-8 sm:py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Header -->
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold mb-3 border border-indigo-200/60 dark:border-indigo-800/60">
+          ⚡ Bảng Tra Cứu Động Từ Chuẩn Quốc Tế
+        </span>
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white mb-3">
+          Động Từ Bất Quy Tắc (V1 - V2 - V3)
+        </h1>
+        <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-base leading-relaxed">
+          Tra cứu nhanh hơn 120+ động từ bất quy tắc thiết yếu nhất. Tích hợp audio phát âm bản ngữ cho cả 3 dạng V1, V2, V3 và chế độ luyện phản xạ mini.
+        </p>
+      </div>
+
+      <!-- Quick Interactive Challenge Banner -->
+      <div class="bg-gradient-to-r from-indigo-900 via-indigo-800 to-violet-900 text-white p-6 sm:p-8 rounded-3xl mb-10 shadow-lg shadow-indigo-900/10 border border-white/10">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="max-w-xl">
+            <span class="px-2.5 py-0.5 rounded-full bg-amber-400 text-amber-950 font-bold text-xs uppercase tracking-wider inline-block mb-2">Thử thách ghi nhớ</span>
+            <h3 class="text-xl sm:text-2xl font-bold">Thử Thách Phản Xạ Động Từ V2 & V3</h3>
+            <p class="text-xs sm:text-sm text-indigo-200 mt-1 leading-relaxed">
+              Hệ thống sẽ chọn ngẫu nhiên một động từ V1. Nhiệm vụ của bạn là gõ dạng quá khứ (V2) và phân từ (V3) để nhận ngay điểm EXP!
+            </p>
+          </div>
+          <button onclick="startVerbChallenge()" class="px-6 py-3.5 rounded-2xl bg-white text-indigo-900 font-extrabold text-sm shadow-md hover:bg-indigo-50 hover:scale-105 transition-all whitespace-nowrap">
+            Bắt đầu thử thách ngay 🎯
+          </button>
+        </div>
+
+        <!-- Challenge Modal Container (Hidden by default) -->
+        <div id="challenge-box" class="hidden mt-6 pt-6 border-t border-white/20">
+          <!-- Dynamic challenge content -->
+        </div>
+      </div>
+
+      <!-- Search & Filter Bar -->
+      <div class="bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm mb-8 space-y-4">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          
+          <!-- Search input -->
+          <div class="relative w-full sm:w-96">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              🔍
+            </span>
+            <input 
+              type="text" 
+              id="verb-search" 
+              placeholder="Tìm theo V1, V2, V3 hoặc nghĩa tiếng Việt..." 
+              oninput="filterVerbs()"
+              class="w-full pl-10 pr-4 py-3 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:border-indigo-600 focus:outline-none transition-colors"
+            />
+          </div>
+
+          <!-- Counter display -->
+          <div class="text-xs font-bold text-slate-400 dark:text-slate-500 whitespace-nowrap">
+            Hiển thị: <span id="verb-count" class="text-indigo-600 dark:text-indigo-400 font-extrabold text-sm">0</span> từ
+          </div>
+        </div>
+
+        <!-- Group Filter Tabs -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none text-xs font-bold">
+          <button onclick="setFilterGroup('ALL')" id="tab-group-ALL" class="group-pill px-4 py-2 rounded-xl bg-indigo-600 text-white transition-all">
+            Tất cả (120+)
+          </button>
+          <button onclick="setFilterGroup('AAA')" id="tab-group-AAA" class="group-pill px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-all">
+            Nhóm AAA (V1=V2=V3, ví dụ: cut - cut - cut)
+          </button>
+          <button onclick="setFilterGroup('ABB')" id="tab-group-ABB" class="group-pill px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-all">
+            Nhóm ABB (V2=V3, ví dụ: buy - bought - bought)
+          </button>
+          <button onclick="setFilterGroup('ABA')" id="tab-group-ABA" class="group-pill px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-all">
+            Nhóm ABA (V1=V3, ví dụ: come - came - come)
+          </button>
+          <button onclick="setFilterGroup('ABC')" id="tab-group-ABC" class="group-pill px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition-all">
+            Nhóm ABC (3 dạng khác nhau, ví dụ: sing - sang - sung)
+          </button>
+        </div>
+      </div>
+
+      <!-- Verbs Table Container -->
+      <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden mb-12">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                <th class="py-4 px-4 sm:px-6">V1 (Nguyên mẫu)</th>
+                <th class="py-4 px-4 sm:px-6">V2 (Quá khứ đơn)</th>
+                <th class="py-4 px-4 sm:px-6">V3 (Quá khứ phân từ)</th>
+                <th class="py-4 px-4 sm:px-6">Nghĩa tiếng Việt</th>
+                <th class="py-4 px-4 sm:px-6 text-center">Nhóm</th>
+              </tr>
+            </thead>
+            <tbody id="verbs-table-body" class="divide-y divide-slate-100 dark:divide-slate-800 text-sm">
+              <!-- Rendered dynamically by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Verb Detail Modal -->
+      <div id="verb-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 max-w-lg w-full p-6 sm:p-8 shadow-2xl animate-fadeIn">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <span id="modal-group-badge" class="text-xs font-bold px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-950/60 dark:text-indigo-400"></span>
+              <h3 id="modal-v1" class="text-3xl font-extrabold text-slate-900 dark:text-white mt-1"></h3>
+            </div>
+            <button onclick="closeVerbModal()" class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">
+              ✕
+            </button>
+          </div>
+
+          <p id="modal-meaning" class="text-base font-semibold text-slate-700 dark:text-slate-300 mb-6"></p>
+
+          <div class="grid grid-cols-3 gap-3 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/60 mb-6 text-center">
+            <div>
+              <span class="block text-xs text-slate-400 font-semibold mb-1">V1 (Base)</span>
+              <span id="modal-col-v1" class="font-bold text-slate-900 dark:text-white text-base block"></span>
+              <span id="modal-col-ipa1" class="text-xs font-mono text-indigo-600 dark:text-indigo-400"></span>
+            </div>
+            <div>
+              <span class="block text-xs text-slate-400 font-semibold mb-1">V2 (Past)</span>
+              <span id="modal-col-v2" class="font-bold text-emerald-600 dark:text-emerald-400 text-base block"></span>
+              <span id="modal-col-ipa2" class="text-xs font-mono text-emerald-600 dark:text-emerald-400"></span>
+            </div>
+            <div>
+              <span class="block text-xs text-slate-400 font-semibold mb-1">V3 (Participle)</span>
+              <span id="modal-col-v3" class="font-bold text-purple-600 dark:text-purple-400 text-base block"></span>
+              <span id="modal-col-ipa3" class="text-xs font-mono text-purple-600 dark:text-purple-400"></span>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/40 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+            <p class="font-bold text-indigo-600 dark:text-indigo-400 mb-1">Ví dụ thực tế:</p>
+            <p id="modal-example" class="italic"></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer id="main-footer"></footer>
+
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/audio.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/irregular-data.js"></script>
+  <script>
+    let activeGroup = 'ALL';
+    let challengeCurrentVerb = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderVerbsTable();
+    });
+
+    function setFilterGroup(group) {
+      activeGroup = group;
+      document.querySelectorAll('.group-pill').forEach(pill => {
+        pill.classList.remove('bg-indigo-600', 'text-white');
+        pill.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+      });
+      const activePill = document.getElementById(`tab-group-${group}`);
+      if (activePill) {
+        activePill.classList.add('bg-indigo-600', 'text-white');
+        activePill.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+      }
+      renderVerbsTable();
+    }
+
+    function filterVerbs() {
+      renderVerbsTable();
+    }
+
+    function renderVerbsTable() {
+      const tbody = document.getElementById('verbs-table-body');
+      const countEl = document.getElementById('verb-count');
+      if (!tbody || !window.IRREGULAR_VERBS) return;
+
+      const query = (document.getElementById('verb-search')?.value || '').trim().toLowerCase();
+
+      const filtered = window.IRREGULAR_VERBS.filter(v => {
+        const matchGroup = (activeGroup === 'ALL' || v.group === activeGroup);
+        const matchQuery = !query || 
+          v.v1.toLowerCase().includes(query) || 
+          v.v2.toLowerCase().includes(query) || 
+          v.v3.toLowerCase().includes(query) || 
+          v.meaning.toLowerCase().includes(query);
+        return matchGroup && matchQuery;
+      });
+
+      if (countEl) countEl.textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" class="py-12 text-center text-slate-400">
+              Không tìm thấy động từ nào khớp với từ khóa tìm kiếm.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(v => {
+        return `
+          <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition-colors cursor-pointer" onclick="openVerbModal('${v.v1}')">
+            <!-- V1 -->
+            <td class="py-3.5 px-4 sm:px-6">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-slate-900 dark:text-white text-base">${v.v1}</span>
+                <span class="text-xs font-mono text-slate-400">${v.ipa1}</span>
+                <button onclick="event.stopPropagation(); playPronounce('${v.v1}', false, this)" class="p-1 text-slate-400 hover:text-indigo-600" title="Phát âm V1">
+                  🔊
+                </button>
+              </div>
+            </td>
+
+            <!-- V2 -->
+            <td class="py-3.5 px-4 sm:px-6">
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-emerald-600 dark:text-emerald-400">${v.v2}</span>
+                <span class="text-xs font-mono text-slate-400">${v.ipa2}</span>
+                <button onclick="event.stopPropagation(); playPronounce('${v.v2.replace('/', '')}', false, this)" class="p-1 text-slate-400 hover:text-emerald-600" title="Phát âm V2">
+                  🔊
+                </button>
+              </div>
+            </td>
+
+            <!-- V3 -->
+            <td class="py-3.5 px-4 sm:px-6">
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-purple-600 dark:text-purple-400">${v.v3}</span>
+                <span class="text-xs font-mono text-slate-400">${v.ipa3}</span>
+                <button onclick="event.stopPropagation(); playPronounce('${v.v3.split('/')[0]}', false, this)" class="p-1 text-slate-400 hover:text-purple-600" title="Phát âm V3">
+                  🔊
+                </button>
+              </div>
+            </td>
+
+            <!-- Meaning -->
+            <td class="py-3.5 px-4 sm:px-6 font-medium text-slate-700 dark:text-slate-300">
+              ${v.meaning}
+            </td>
+
+            <!-- Group Badge -->
+            <td class="py-3.5 px-4 sm:px-6 text-center">
+              <span class="inline-block text-[11px] font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+                ${v.group}
+              </span>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function openVerbModal(v1Word) {
+      const v = window.IRREGULAR_VERBS.find(item => item.v1 === v1Word);
+      if (!v) return;
+
+      document.getElementById('modal-group-badge').textContent = `Nhóm ${v.group}`;
+      document.getElementById('modal-v1').textContent = v.v1;
+      document.getElementById('modal-meaning').textContent = v.meaning;
+
+      document.getElementById('modal-col-v1').textContent = v.v1;
+      document.getElementById('modal-col-ipa1').textContent = v.ipa1;
+
+      document.getElementById('modal-col-v2').textContent = v.v2;
+      document.getElementById('modal-col-ipa2').textContent = v.ipa2;
+
+      document.getElementById('modal-col-v3').textContent = v.v3;
+      document.getElementById('modal-col-ipa3').textContent = v.ipa3;
+
+      document.getElementById('modal-example').textContent = `"${v.example}"`;
+
+      document.getElementById('verb-modal').classList.remove('hidden');
+    }
+
+    function closeVerbModal() {
+      document.getElementById('verb-modal').classList.add('hidden');
+    }
+
+    // ================= MINI CHALLENGE =================
+    function startVerbChallenge() {
+      const box = document.getElementById('challenge-box');
+      if (!box || !window.IRREGULAR_VERBS) return;
+
+      box.classList.remove('hidden');
+      const randomVerb = window.IRREGULAR_VERBS[Math.floor(Math.random() * window.IRREGULAR_VERBS.length)];
+      challengeCurrentVerb = randomVerb;
+
+      box.innerHTML = `
+        <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 max-w-xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-bold text-amber-300 uppercase">Câu hỏi thử thách:</span>
+            <button onclick="document.getElementById('challenge-box').classList.add('hidden')" class="text-xs text-indigo-200 hover:text-white">✕ Đóng</button>
+          </div>
+
+          <h4 class="text-xl font-bold mb-1">
+            Động từ V1: <span class="text-amber-300 underline font-extrabold">${randomVerb.v1}</span> (${randomVerb.meaning})
+          </h4>
+          <p class="text-xs text-indigo-200 mb-4">Hãy nhập dạng quá khứ (V2) và quá khứ phân từ (V3) của động từ này:</p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+            <div>
+              <label class="block text-xs font-semibold mb-1 text-slate-200">Dạng V2 (Past Simple):</label>
+              <input type="text" id="challenge-input-v2" placeholder="Ví dụ: went" class="w-full px-4 py-2.5 rounded-xl bg-white/20 border border-white/30 text-white placeholder-indigo-200 focus:outline-none focus:border-white text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1 text-slate-200">Dạng V3 (Past Participle):</label>
+              <input type="text" id="challenge-input-v3" placeholder="Ví dụ: gone" class="w-full px-4 py-2.5 rounded-xl bg-white/20 border border-white/30 text-white placeholder-indigo-200 focus:outline-none focus:border-white text-sm" />
+            </div>
+          </div>
+
+          <div id="challenge-feedback" class="mb-4 hidden text-xs font-bold p-3 rounded-xl"></div>
+
+          <div class="flex items-center justify-between">
+            <button onclick="checkVerbChallenge()" class="px-5 py-2.5 rounded-xl bg-amber-400 text-amber-950 font-bold text-xs hover:bg-amber-300 transition-colors">
+              Kiểm tra câu trả lời
+            </button>
+            <button onclick="startVerbChallenge()" class="text-xs text-indigo-200 hover:underline">
+              Đổi từ khác 🎲
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function checkVerbChallenge() {
+      if (!challengeCurrentVerb) return;
+
+      const v2Input = (document.getElementById('challenge-input-v2')?.value || '').trim().toLowerCase();
+      const v3Input = (document.getElementById('challenge-input-v3')?.value || '').trim().toLowerCase();
+      const fb = document.getElementById('challenge-feedback');
+
+      const expectedV2 = challengeCurrentVerb.v2.toLowerCase();
+      const expectedV3 = challengeCurrentVerb.v3.toLowerCase();
+
+      // Cho phép khớp một trong các dạng nếu có dấu gạch chéo
+      const matchV2 = expectedV2.split('/').some(part => part.trim() === v2Input);
+      const matchV3 = expectedV3.split('/').some(part => part.trim() === v3Input);
+
+      if (fb) {
+        fb.classList.remove('hidden');
+        if (matchV2 && matchV3) {
+          fb.className = 'mb-4 text-xs font-bold p-3 rounded-xl bg-emerald-500/20 border border-emerald-400 text-emerald-200';
+          fb.innerHTML = `🎉 Tuyệt đối chính xác! V1: ${challengeCurrentVerb.v1} -> V2: ${challengeCurrentVerb.v2} -> V3: ${challengeCurrentVerb.v3}. (+20 XP)`;
+          if (window.appStorage) {
+            window.appStorage.addXP(20);
+          }
+          if (typeof updateHeaderStats === 'function') updateHeaderStats();
+        } else {
+          fb.className = 'mb-4 text-xs font-bold p-3 rounded-xl bg-red-500/20 border border-red-400 text-red-200';
+          fb.innerHTML = `✕ Chưa đúng rồi! Đáp án chuẩn là: V2: <strong>${challengeCurrentVerb.v2}</strong> | V3: <strong>${challengeCurrentVerb.v3}</strong>`;
+        }
+      }
+    }
+  </script>
+</body>
+</html>

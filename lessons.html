@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kho Bài Học Tương Tác | EduMaster English</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 500: '#6366f1', 600: '#4f46e5' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-[#f7f8f6] dark:bg-[#111722] text-slate-800 dark:text-slate-100 flex flex-col min-h-screen">
+
+  <header id="main-header"></header>
+
+  <main class="flex-grow py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Level Selection Tabs Bar -->
+      <div class="mb-8">
+        <div class="flex items-center justify-between flex-wrap gap-4 mb-3">
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">Không Gian Bài Học Tương Tác</h1>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Chọn cấp độ để tải các bài giảng ngữ pháp, từ vựng chuẩn âm và bài kiểm tra</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" id="level-selector-tabs">
+          <!-- Rendered dynamically by assets/js/lessons.js -->
+        </div>
+      </div>
+
+      <!-- Main Two-Column Learning Area -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left Sidebar: Lessons in Selected Level (4 cols) -->
+        <div class="lg:col-span-4 space-y-4">
+          <div class="flex items-center justify-between px-1">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Danh sách Unit & Bài học</h3>
+            <span class="text-xs text-indigo-600 dark:text-indigo-400 font-semibold">Theo chuẩn CEFR</span>
+          </div>
+          <div class="space-y-3" id="lessons-list">
+            <!-- Rendered by assets/js/lessons.js -->
+          </div>
+        </div>
+
+        <!-- Right Main: Active Lesson Viewer (8 cols) -->
+        <div class="lg:col-span-8" id="lesson-viewer">
+          <!-- Rendered by assets/js/lessons.js -->
+          <div class="p-12 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
+            <p class="text-slate-400">Đang chuẩn bị dữ liệu bài học...</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer id="main-footer"></footer>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/audio.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/lessons.js"></script>
+</body>
+</html>

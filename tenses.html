@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="vi" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cẩm Nang 12 Thì Tiếng Anh Toàn Diện | EduMaster English</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 500: '#6366f1', 600: '#4f46e5' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-[#f7f8f6] dark:bg-[#111722] text-slate-800 dark:text-slate-100 flex flex-col min-h-screen">
+
+  <header id="main-header"></header>
+
+  <main class="flex-grow py-8 sm:py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Page Header -->
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold mb-3 border border-indigo-200/60 dark:border-indigo-800/60">
+          ⏳ Hệ Thống Ngữ Pháp Cốt Lõi
+        </span>
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white mb-3">
+          12 Thì Tiếng Anh Toàn Diện (The 12 Tenses)
+        </h1>
+        <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-base leading-relaxed">
+          Nắm trọn vẹn bản đồ thời gian của ngữ pháp tiếng Anh: công thức chuẩn xác, từ khóa dấu hiệu nhận biết, phân tích lỗi bẫy đề thi và bài tập thực hành phản xạ.
+        </p>
+      </div>
+
+      <!-- Time Axis Filter Tabs -->
+      <div class="flex items-center justify-center gap-2 mb-10 flex-wrap text-xs sm:text-sm font-bold">
+        <button onclick="filterTenseTime('all')" id="time-tab-all" class="time-btn px-5 py-2.5 rounded-2xl bg-indigo-600 text-white shadow-md shadow-indigo-600/20 transition-all">
+          Toàn bộ 12 Thì
+        </button>
+        <button onclick="filterTenseTime('present')" id="time-tab-present" class="time-btn px-5 py-2.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 transition-all">
+          4 Thì Hiện Tại (Present)
+        </button>
+        <button onclick="filterTenseTime('past')" id="time-tab-past" class="time-btn px-5 py-2.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 transition-all">
+          4 Thì Quá Khứ (Past)
+        </button>
+        <button onclick="filterTenseTime('future')" id="time-tab-future" class="time-btn px-5 py-2.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 transition-all">
+          4 Thì Tương Lai (Future)
+        </button>
+      </div>
+
+      <!-- Main Layout: Sidebar & Active Tense Detail -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+        
+        <!-- Left: Tense Quick List (4 cols) -->
+        <div class="lg:col-span-4 space-y-3" id="tenses-list-nav">
+          <!-- Rendered dynamically by tenses data -->
+        </div>
+
+        <!-- Right: Active Tense In-Depth Studio (8 cols) -->
+        <div class="lg:col-span-8" id="tense-detail-view">
+          <!-- Rendered dynamically -->
+        </div>
+
+      </div>
+
+      <!-- Master Comparison Matrix Table (Bảng Tổng Hợp Đối Chiếu 12 Thì) -->
+      <div class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm mb-12">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Bảng Tổng Hợp Ma Trận 12 Thì Tiếng Anh</h3>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">Đối chiếu nhanh cấu trúc và từ khóa cốt lõi giữa các thể và trục thời gian</p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm border-collapse">
+            <thead>
+              <tr class="bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold border-b border-slate-200 dark:border-slate-800">
+                <th class="p-3.5">Thể / Trục thời gian</th>
+                <th class="p-3.5">Quá Khứ (Past)</th>
+                <th class="p-3.5">Hiện Tại (Present)</th>
+                <th class="p-3.5">Tương Lai (Future)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+              <tr>
+                <td class="p-3.5 font-bold bg-slate-50/50 dark:bg-slate-800/40">1. Đơn (Simple)</td>
+                <td class="p-3.5">
+                  <strong class="text-indigo-600 dark:text-indigo-400">V2 / V-ed</strong>
+                  <br><span class="text-[11px] text-slate-400">yesterday, ago, last...</span>
+                </td>
+                <td class="p-3.5">
+                  <strong class="text-indigo-600 dark:text-indigo-400">V(s/es)</strong>
+                  <br><span class="text-[11px] text-slate-400">always, usually, every day...</span>
+                </td>
+                <td class="p-3.5">
+                  <strong class="text-indigo-600 dark:text-indigo-400">will + V-bare</strong>
+                  <br><span class="text-[11px] text-slate-400">tomorrow, next week...</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-3.5 font-bold bg-slate-50/50 dark:bg-slate-800/40">2. Tiếp diễn (Continuous)</td>
+                <td class="p-3.5">
+                  <strong class="text-indigo-600 dark:text-indigo-400">was/were + V-ing</strong>
+                  <br><span class="text-[11px] text-slate-400">at 8 PM yesterday, while...</span>
+                </td>
+                <td class="p-3.5">
+                  <strong class="text-indigo-600 dark:text-indigo-400">am/is/are + V-ing</strong>
+                  <br><span class="text-[11px] text-slate-400">now, right now, Look!...</span>
+                </td>
+                <td class="p-3.5">
+                  <strong class="text-indigo-600 dark:text-indigo-400">will be + V-ing</strong>
+                  <br><span class="text-[11px] text-slate-400">at this time tomorrow...</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-3.5 font-bold bg-slate-50/50 dark:bg-slate-800/40">3. Hoàn thành (Perfect)</td>
+                <td class="p-3.5">
+                  <strong class="text-indigo-600 dark:text-indigo-400">had + V3/V-ed</strong>
+                  <br><span class="text-[11px] text-slate-400">by the time, before...</span>
+                </td>
+                <td class="p-3.5">
+                  <strong class="text-indigo-600 dark:text-indigo-400">have/has + V3/V-ed</strong>
+                  <br><span class="text-[11px] text-slate-400">since, for, already, yet...</span>
+                </td>
+                <td class="p-3.5">
+                  <strong class="text-indigo-600 dark:text-indigo-400">will have + V3/V-ed</strong>
+                  <br><span class="text-[11px] text-slate-400">by next year, by then...</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-3.5 font-bold bg-slate-50/50 dark:bg-slate-800/40">4. Hoàn thành tiếp diễn</td>
+                <td class="p-3.5">
+                  <strong class="text-indigo-600 dark:text-indigo-400">had been + V-ing</strong>
+                  <br><span class="text-[11px] text-slate-400">for hours before...</span>
+                </td>
+                <td class="p-3.5">
+                  <strong class="text-indigo-600 dark:text-indigo-400">have/has been + V-ing</strong>
+                  <br><span class="text-[11px] text-slate-400">all morning, how long...</span>
+                </td>
+                <td class="p-3.5">
+                  <strong class="text-indigo-600 dark:text-indigo-400">will have been + V-ing</strong>
+                  <br><span class="text-[11px] text-slate-400">by next month for 10 years...</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer id="main-footer"></footer>
+
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/audio.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/tenses-data.js"></script>
+  <script>
+    let activeTimeFilter = 'all';
+    let selectedTenseId = 'present-simple';
+    let tenseQuizAnswers = {};
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderTensesNav();
+      renderTenseDetail();
+    });
+
+    function filterTenseTime(time) {
+      activeTimeFilter = time;
+      document.querySelectorAll('.time-btn').forEach(btn => {
+        btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-md');
+        btn.classList.add('bg-white', 'dark:bg-slate-900', 'border', 'border-slate-200', 'dark:border-slate-800', 'text-slate-600', 'dark:text-slate-300');
+      });
+      const activeBtn = document.getElementById(`time-tab-${time}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
+        activeBtn.classList.remove('bg-white', 'dark:bg-slate-900', 'border', 'text-slate-600', 'dark:text-slate-300');
+      }
+
+      // Chọn thì đầu tiên trong nhóm lọc
+      const filtered = window.ENGLISH_TENSES.filter(t => activeTimeFilter === 'all' || t.time === activeTimeFilter);
+      if (filtered.length > 0) {
+        selectedTenseId = filtered[0].id;
+      }
+      renderTensesNav();
+      renderTenseDetail();
+    }
+
+    function selectTense(id) {
+      selectedTenseId = id;
+      tenseQuizAnswers = {};
+      renderTensesNav();
+      renderTenseDetail();
+    }
+
+    function renderTensesNav() {
+      const container = document.getElementById('tenses-list-nav');
+      if (!container || !window.ENGLISH_TENSES) return;
+
+      const filtered = window.ENGLISH_TENSES.filter(t => activeTimeFilter === 'all' || t.time === activeTimeFilter);
+
+      container.innerHTML = filtered.map(t => {
+        const isSelected = t.id === selectedTenseId;
+        return `
+          <div 
+            onclick="selectTense('${t.id}')"
+            class="p-4 rounded-2xl cursor-pointer transition-all border ${
+              isSelected 
+                ? 'border-indigo-600 bg-indigo-50/80 dark:bg-indigo-950/40 shadow-sm' 
+                : 'border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-slate-300 dark:hover:border-slate-700'
+            }">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider text-white" style="background-color: ${t.color}">
+                ${t.time}
+              </span>
+              <span class="text-xs text-slate-400 font-medium">${t.tag}</span>
+            </div>
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white">${t.nameVi}</h4>
+            <p class="text-xs text-slate-500 font-mono mt-0.5">${t.nameEn}</p>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderTenseDetail() {
+      const container = document.getElementById('tense-detail-view');
+      if (!container || !window.ENGLISH_TENSES) return;
+
+      const t = window.ENGLISH_TENSES.find(item => item.id === selectedTenseId) || window.ENGLISH_TENSES[0];
+
+      container.innerHTML = `
+        <div class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm animate-fadeIn">
+          
+          <!-- Header Banner -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-100 dark:border-slate-800 gap-4">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-xs font-bold px-3 py-1 rounded-full text-white" style="background-color: ${t.color}">
+                  ${t.nameEn}
+                </span>
+                <span class="text-xs text-slate-400 font-semibold">• ${t.tag}</span>
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">${t.nameVi}</h2>
+            </div>
+            <button onclick="playPronounce('${t.nameEn}', false, this)" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-500 hover:text-indigo-600 self-start sm:self-auto flex items-center gap-1.5 text-xs font-semibold">
+              <span>🔊 Nghe tên thì</span>
+            </button>
+          </div>
+
+          <!-- Formula Cards -->
+          <div class="my-6">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-3">1. Cấu trúc ngữ pháp chuẩn (Formulas)</h3>
+            <div class="space-y-2.5 text-xs sm:text-sm font-mono">
+              <div class="p-3.5 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/60 dark:border-emerald-900/60 text-emerald-900 dark:text-emerald-200 flex items-start gap-2">
+                <span class="font-bold text-emerald-600 dark:text-emerald-400 text-base leading-none">(+)</span>
+                <span class="font-semibold">${t.formula.positive}</span>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-red-50/70 dark:bg-red-950/30 border border-red-200/60 dark:border-red-900/60 text-red-900 dark:text-red-200 flex items-start gap-2">
+                <span class="font-bold text-red-600 dark:text-red-400 text-base leading-none">(-)</span>
+                <span class="font-semibold">${t.formula.negative}</span>
+              </div>
+              <div class="p-3.5 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-200/60 dark:border-indigo-900/60 text-indigo-900 dark:text-indigo-200 flex items-start gap-2">
+                <span class="font-bold text-indigo-600 dark:text-indigo-400 text-base leading-none">(?)</span>
+                <span class="font-semibold">${t.formula.question}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Signals / Keywords -->
+          <div class="my-6">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-3">2. Dấu hiệu nhận biết quan trọng (Signal Words)</h3>
+            <div class="flex flex-wrap gap-2">
+              ${t.signals.map(s => `
+                <span class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold text-xs border border-slate-200/60 dark:border-slate-700">
+                  ${s}
+                </span>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Core Usages with Examples & Audio -->
+          <div class="my-6">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-3">3. Cách dùng thực tế & Ví dụ song ngữ</h3>
+            <div class="space-y-3">
+              ${t.usages.map((u, idx) => `
+                <div class="p-4 rounded-2xl bg-slate-50/60 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-800">
+                  <h4 class="font-bold text-sm text-slate-900 dark:text-white mb-1.5">
+                    ${idx + 1}. ${u.title}
+                  </h4>
+                  <div class="flex items-center justify-between text-xs sm:text-sm text-indigo-700 dark:text-indigo-300 font-medium italic">
+                    <span>"${u.example}"</span>
+                    <button onclick="playPronounce('${u.example.replace(/'/g, "\\'")}', false, this)" class="p-1 text-slate-400 hover:text-indigo-600 ml-2" title="Nghe câu ví dụ">
+                      🔊
+                    </button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Common Exam Mistakes & Traps -->
+          <div class="my-6 p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200/60 dark:border-amber-900/60 text-xs sm:text-sm text-amber-900 dark:text-amber-200 leading-relaxed">
+            <span class="font-bold block mb-1">⚠️ Cảnh báo bẫy thi & Lỗi phổ biến:</span>
+            ${t.mistakes}
+          </div>
+
+          <!-- Mini Practice Quiz for this Tense -->
+          <div class="my-6 pt-6 border-t border-slate-100 dark:border-slate-800">
+            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">4. Bài tập phản xạ nhanh</h3>
+            <div class="space-y-4">
+              ${t.quiz.map((qItem, qIdx) => {
+                const userChoice = tenseQuizAnswers[qIdx];
+                return `
+                  <div class="p-4 rounded-2xl border border-slate-200/70 dark:border-slate-800 bg-slate-50/40 dark:bg-slate-800/20">
+                    <p class="font-semibold text-slate-900 dark:text-white text-sm mb-3">
+                      Câu ${qIdx + 1}: ${qItem.q}
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      ${qItem.options.map((opt, optIdx) => {
+                        let optClass = 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300';
+                        if (userChoice !== undefined) {
+                          if (optIdx === qItem.correct) {
+                            optClass = '!border-emerald-500 !bg-emerald-50 dark:!bg-emerald-950/60 font-bold text-emerald-800 dark:text-emerald-200';
+                          } else if (userChoice === optIdx && optIdx !== qItem.correct) {
+                            optClass = '!border-red-500 !bg-red-50 dark:!bg-red-950/60 text-red-800 dark:text-red-200';
+                          }
+                        }
+                        return `
+                          <button 
+                            onclick="answerTenseQuiz(${qIdx}, ${optIdx})"
+                            class="p-2.5 rounded-xl border text-xs text-left font-medium transition-all ${optClass}">
+                            <span class="font-bold mr-1">${String.fromCharCode(65 + optIdx)}.</span> ${opt}
+                          </button>
+                        `;
+                      }).join('')}
+                    </div>
+                    ${userChoice !== undefined ? `
+                      <div class="mt-3 p-3 rounded-xl text-xs ${userChoice === qItem.correct ? 'bg-emerald-100/70 text-emerald-900 dark:bg-emerald-950/60 dark:text-emerald-300' : 'bg-red-100/70 text-red-900 dark:bg-red-950/60 dark:text-red-300'}">
+                        <strong>${userChoice === qItem.correct ? '✓ Đúng rồi!' : '✕ Chưa chuẩn!'}</strong> ${qItem.exp}
+                      </div>
+                    ` : ''}
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+        </div>
+      `;
+    }
+
+    function answerTenseQuiz(qIdx, optIdx) {
+      tenseQuizAnswers[qIdx] = optIdx;
+      const t = window.ENGLISH_TENSES.find(item => item.id === selectedTenseId) || window.ENGLISH_TENSES[0];
+      if (optIdx === t.quiz[qIdx].correct) {
+        if (window.appStorage) {
+          window.appStorage.addXP(10);
+        }
+        if (typeof updateHeaderStats === 'function') updateHeaderStats();
+        window.showToast('Chính xác! +10 XP ⚡', 'success');
+      }
+      renderTenseDetail();
+    }
+  </script>
+</body>
+</html>

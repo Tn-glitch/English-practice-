@@ -1,0 +1,58 @@
+/* ── EduMaster English — Global Styles ────────────────────────────────────── */
+
+/* Smooth scrolling */
+html { scroll-behavior: smooth; }
+
+/* Card hover animation */
+.card-hover { transition: transform .2s ease, box-shadow .2s ease; }
+.card-hover:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,.10); }
+
+/* ── Nav dark mode overrides ──────────────────────────────────────────────── */
+.dark #site-nav { background: rgba(17,23,34,0.97) !important; border-bottom-color: #1e293b !important; }
+.dark #nav-mobile-menu { background: #111722 !important; border-top-color: #1e293b !important; }
+
+/* Nav link colors in dark mode */
+.dark .nav-link:not(.bg-indigo-600) {
+  color: #cbd5e1 !important;       /* slate-300 */
+}
+.dark .nav-link:not(.bg-indigo-600):hover {
+  background: #1e293b !important;  /* slate-800 */
+  color: #f1f5f9 !important;
+}
+
+/* Mobile nav link colors in dark mode */
+.dark #nav-mobile-menu a:not(.bg-indigo-600) {
+  color: #e2e8f0 !important;
+}
+.dark #nav-mobile-menu a:not(.bg-indigo-600):hover {
+  background: #1e293b !important;
+}
+
+/* Dark mode toggle & hamburger border */
+.dark #nav-dark-toggle,
+.dark #nav-mobile-toggle {
+  border-color: #334155 !important;
+  color: #94a3b8 !important;
+}
+.dark #nav-dark-toggle:hover,
+.dark #nav-mobile-toggle:hover {
+  background: #1e293b !important;
+}
+
+/* Logo text in dark */
+.dark #site-nav a[href="index.html"] span { color: #f1f5f9 !important; }
+
+/* ── Focus rings ──────────────────────────────────────────────────────────── */
+button:focus-visible, a:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ── Utility ──────────────────────────────────────────────────────────────── */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

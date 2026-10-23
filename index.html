@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="vi" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduMaster English | Nền Tảng Học Tiếng Anh Chuẩn CEFR A1 - C2</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-[#f7f8f6] dark:bg-[#111722] text-slate-800 dark:text-slate-100 flex flex-col min-h-screen">
+
+  <!-- Header Placeholder (Rendered automatically by app.js) -->
+  <header id="main-header"></header>
+
+  <!-- Main Content -->
+  <main class="flex-grow">
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden py-16 sm:py-24 bg-gradient-to-b from-[#eef2ee]/60 via-[#f7f8f6] to-[#f7f8f6] dark:from-[#151e2d] dark:via-[#111722] dark:to-[#111722]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-3xl mx-auto">
+          <!-- Tag line -->
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 text-xs sm:text-sm font-bold mb-6 border border-emerald-200/60 dark:border-emerald-800/60">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            Tiêu chuẩn Khung Châu Âu (CEFR Framework) • Dịu Mắt & Chuẩn Học Thuật
+          </div>
+
+          <!-- Main Title -->
+          <h1 class="text-4xl sm:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight mb-6">
+            Làm chủ Tiếng Anh từ <span class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Căn bản đến Nâng cao</span>
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
+            Hệ thống bài học chuẩn hóa 6 cấp độ từ <strong>A1 (Beginner)</strong> đến <strong>C2 (Mastery)</strong>. Tích hợp công nghệ phát âm giọng bản xứ AI, Flashcard 3D thông minh và bài thi xếp lớp chuẩn xác.
+          </p>
+
+          <!-- Call to action buttons -->
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="placement-test.html" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-indigo-600 text-white font-bold text-base shadow-lg shadow-indigo-600/30 hover:bg-indigo-700 hover:shadow-indigo-600/50 hover:-translate-y-0.5 transition-all text-center">
+              🎯 Test trình độ xếp lớp miễn phí
+            </a>
+            <a href="roadmap.html" class="w-full sm:w-auto px-8 py-4 rounded-2xl border-2 border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-bold text-base hover:bg-slate-100 dark:hover:bg-slate-800 hover:-translate-y-0.5 transition-all text-center">
+              🗺 Khám phá Lộ trình A1 - C2
+            </a>
+          </div>
+
+          <!-- Live Trust indicators -->
+          <div class="mt-12 pt-8 border-t border-slate-200/80 dark:border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+            <div>
+              <div class="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">6 Cấp độ</div>
+              <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Chuẩn CEFR Châu Âu</div>
+            </div>
+            <div>
+              <div class="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">100% Native</div>
+              <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Âm thanh giọng Mỹ / Anh</div>
+            </div>
+            <div>
+              <div class="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">Flashcard 3D</div>
+              <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Ghi nhớ ngắt quãng</div>
+            </div>
+            <div>
+              <div class="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">Gamification</div>
+              <div class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Tích lũy XP & Huy hiệu</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CEFR 6 Levels Overview Grid -->
+    <section class="py-16 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-3">Hệ thống 6 Cấp Độ Chuẩn CEFR</h2>
+          <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base">
+            Mỗi cấp độ được thiết kế chi tiết với mục tiêu năng lực "Can-Do", vốn từ vựng mục tiêu và ngữ pháp thực tiễn.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="levels-overview-grid">
+          <!-- A1 -->
+          <div class="p-6 rounded-2xl border border-blue-200 dark:border-blue-900/60 bg-blue-50/30 dark:bg-blue-950/20 hover:shadow-lg transition-all group flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900/60 dark:text-blue-300">Căn bản</span>
+                <span class="text-xs text-slate-400">500 từ vựng</span>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 transition-colors">A1 - Beginner</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+                Dành cho người mới bắt đầu từ con số 0. Làm quen bảng chữ cái, phát âm cơ bản, chào hỏi, giới thiệu bản thân và sinh hoạt hàng ngày.
+              </p>
+            </div>
+            <a href="lessons.html?level=A1" class="inline-flex items-center text-sm font-bold text-blue-600 hover:text-blue-700">
+              Vào học Cấp độ A1 →
+            </a>
+          </div>
+
+          <!-- A2 -->
+          <div class="p-6 rounded-2xl border border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/30 dark:bg-emerald-950/20 hover:shadow-lg transition-all group flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300">Sơ cấp</span>
+                <span class="text-xs text-slate-400">1,000 từ vựng</span>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-emerald-600 transition-colors">A2 - Elementary</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+                Giao tiếp các tình huống thường nhật quen thuộc: mua sắm, hỏi đường, quá khứ đơn, so sánh hơn và miêu tả người xung quanh.
+              </p>
+            </div>
+            <a href="lessons.html?level=A2" class="inline-flex items-center text-sm font-bold text-emerald-600 hover:text-emerald-700">
+              Vào học Cấp độ A2 →
+            </a>
+          </div>
+
+          <!-- B1 -->
+          <div class="p-6 rounded-2xl border border-amber-200 dark:border-amber-900/60 bg-amber-50/30 dark:bg-amber-950/20 hover:shadow-lg transition-all group flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-300">Trung cấp</span>
+                <span class="text-xs text-slate-400">2,000 từ vựng</span>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-amber-600 transition-colors">B1 - Intermediate</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+                Tự tin du lịch nước ngoài, trình bày quan điểm cá nhân, xử lý các tình huống công việc cơ bản, thì hiện tại hoàn thành và câu điều kiện.
+              </p>
+            </div>
+            <a href="lessons.html?level=B1" class="inline-flex items-center text-sm font-bold text-amber-600 hover:text-amber-700">
+              Vào học Cấp độ B1 →
+            </a>
+          </div>
+
+          <!-- B2 -->
+          <div class="p-6 rounded-2xl border border-purple-200 dark:border-purple-900/60 bg-purple-50/30 dark:bg-purple-950/20 hover:shadow-lg transition-all group flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900/60 dark:text-purple-300">Trung cao cấp</span>
+                <span class="text-xs text-slate-400">4,000 từ vựng</span>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-purple-600 transition-colors">B2 - Upper-Intermediate</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+                Giao tiếp lưu loát với người bản xứ, viết luận chuyên đề, hiểu các văn bản phức tạp, mệnh đề quan hệ rút gọn, Idioms và Phrasal verbs.
+              </p>
+            </div>
+            <a href="lessons.html?level=B2" class="inline-flex items-center text-sm font-bold text-purple-600 hover:text-purple-700">
+              Vào học Cấp độ B2 →
+            </a>
+          </div>
+
+          <!-- C1 -->
+          <div class="p-6 rounded-2xl border border-pink-200 dark:border-pink-900/60 bg-pink-50/30 dark:bg-pink-950/20 hover:shadow-lg transition-all group flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-pink-100 text-pink-800 dark:bg-pink-900/60 dark:text-pink-300">Cao cấp</span>
+                <span class="text-xs text-slate-400">8,000 từ vựng</span>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-pink-600 transition-colors">C1 - Advanced</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+                Năng lực ngôn ngữ học thuật và chuyên môn sắc sảo. Cấu trúc đảo ngữ, Collocations học thuật nâng cao, diễn đạt linh hoạt mọi tình huống.
+              </p>
+            </div>
+            <a href="lessons.html?level=C1" class="inline-flex items-center text-sm font-bold text-pink-600 hover:text-pink-700">
+              Vào học Cấp độ C1 →
+            </a>
+          </div>
+
+          <!-- C2 -->
+          <div class="p-6 rounded-2xl border border-red-200 dark:border-red-900/60 bg-red-50/30 dark:bg-red-950/20 hover:shadow-lg transition-all group flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-red-100 text-red-800 dark:bg-red-900/60 dark:text-red-300">Bậc thầy</span>
+                <span class="text-xs text-slate-400">15,000+ từ vựng</span>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-red-600 transition-colors">C2 - Mastery</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+                Đạt độ thuần thục như người bản ngữ có học thức cao. Tinh tế trong ngôn từ, viết học thuật đỉnh cao và phân tích văn phong sâu sắc.
+              </p>
+            </div>
+            <a href="lessons.html?level=C2" class="inline-flex items-center text-sm font-bold text-red-600 hover:text-red-700">
+              Vào học Cấp độ C2 →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Grammar & Vocabulary Hubs (12 Thì, Động Từ V2/V3, Từ Điển & Đọc Hiểu) -->
+    <section class="py-16 bg-white dark:bg-slate-900 border-y border-slate-200/80 dark:border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Chuyên mục đặc biệt</span>
+          <h2 class="text-3xl font-bold text-slate-900 dark:text-white mt-1">4 Trụ Cột Nền Tảng Cho Người Học Tiếng Anh</h2>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2">Được thiết kế chuyên sâu, tra cứu nhanh và tương tác thực hành tức thì</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Hub 1: 12 Thì -->
+          <div class="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-indigo-50/70 to-slate-50 dark:from-indigo-950/40 dark:to-slate-800/40 border-2 border-indigo-200/60 dark:border-indigo-900/60 hover:shadow-xl transition-all group flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold px-3 py-1 rounded-full bg-indigo-600 text-white">Ngữ pháp cốt lõi</span>
+                <span class="text-xs text-slate-400 font-semibold">12 Tenses</span>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-indigo-600 transition-colors">
+                ⏳ 12 Thì Tiếng Anh Toàn Diện
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
+                Trực quan hóa 12 thì qua 3 trục thời gian (Quá khứ, Hiện tại, Tương lai). Đầy đủ công thức (+/-/?) cho động từ thường và To Be, từ khóa nhận biết, các bẫy đề thi và trắc nghiệm củng cố ngay tại chỗ.
+              </p>
+            </div>
+            <a href="tenses.html" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-indigo-600 text-white font-bold text-xs sm:text-sm shadow-md shadow-indigo-600/30 hover:bg-indigo-700 transition-all">
+              Khám phá 12 Thì →
+            </a>
+          </div>
+
+          <!-- Hub 2: Bảng Động Từ Bất Quy Tắc V2/V3 -->
+          <div class="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-teal-50/70 to-slate-50 dark:from-teal-950/40 dark:to-slate-800/40 border-2 border-teal-200/60 dark:border-teal-900/60 hover:shadow-xl transition-all group flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold px-3 py-1 rounded-full bg-teal-600 text-white">Tra cứu nhanh</span>
+                <span class="text-xs text-slate-400 font-semibold">120+ Verbs</span>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-teal-600 transition-colors">
+                📋 Bảng Động Từ Bất Quy Tắc (V2/V3)
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
+                Phân loại theo các nhóm quy luật dễ nhớ: Nhóm AAA (cut-cut-cut), Nhóm ABB (buy-bought-bought), Nhóm ABA (come-came-come), Nhóm ABC (sing-sang-sung). Tích hợp phát âm chuẩn cả 3 dạng và mini game phản xạ.
+              </p>
+            </div>
+            <a href="irregular-verbs.html" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-teal-600 text-white font-bold text-xs sm:text-sm shadow-md shadow-teal-600/30 hover:bg-teal-700 transition-all">
+              Tra cứu bảng V2 & V3 →
+            </a>
+          </div>
+
+          <!-- Hub 3: Tra Cứu Từ Điển Thông Minh -->
+          <div class="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-emerald-50/70 to-slate-50 dark:from-emerald-950/40 dark:to-slate-800/40 border-2 border-emerald-200/60 dark:border-emerald-900/60 hover:shadow-xl transition-all group flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-600 text-white">Từ vựng chuẩn CEFR</span>
+                <span class="text-xs text-slate-400 font-semibold">Tra Cứu Mở Rộng</span>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-emerald-600 transition-colors">
+                📖 Tra Cứu Từ Vựng Thông Minh
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
+                Tra cứu từ vựng theo từng cấp độ kèm phiên âm IPA, từ loại, dịch nghĩa, câu ví dụ song ngữ, Collocations và từ đồng nghĩa. Hỗ trợ tra từ mới bên ngoài thông qua từ điển trực tuyến và audio phát âm bản xứ 2 tốc độ.
+              </p>
+            </div>
+            <a href="dictionary.html" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-emerald-600 text-white font-bold text-xs sm:text-sm shadow-md shadow-emerald-600/30 hover:bg-emerald-700 transition-all">
+              Vào tra cứu từ điển →
+            </a>
+          </div>
+
+          <!-- Hub 4: Đọc & Trả Lời Câu Hỏi (Reading Comprehension) -->
+          <div class="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-yellow-50/70 to-slate-50 dark:from-yellow-950/40 dark:to-slate-800/40 border-2 border-yellow-200/60 dark:border-yellow-900/60 hover:shadow-xl transition-all group flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold px-3 py-1 rounded-full bg-yellow-600 text-white">Đọc hiểu ngẫu nhiên</span>
+                <span class="text-xs text-slate-400 font-semibold">Reading Comprehension</span>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-yellow-600 transition-colors">
+                📰 Luyện Đọc & Trả Lời Câu Hỏi
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
+                Rèn luyện khả năng đọc hiểu với các đoạn văn ngẫu nhiên từ cấp độ A1 đến C2 không bị trùng lặp. Tích hợp câu hỏi trắc nghiệm kiểm tra độ hiểu, giải thích đáp án và chấm điểm tức thì.
+              </p>
+            </div>
+            <a href="reading.html" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-yellow-600 text-white font-bold text-xs sm:text-sm shadow-md shadow-yellow-600/30 hover:bg-yellow-700 transition-all">
+              Khám phá Luyện đọc →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modern Learning Methods Feature Grid -->
+    <section class="py-16 sm:py-24 bg-[#f0f3ef]/50 dark:bg-[#151e2d]/60">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Phương pháp học hiện đại</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mt-2">Học Nhanh Hơn, Nhớ Lâu Hơn</h2>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-2">Kết hợp trọn vẹn 4 phương pháp đào tạo ngôn ngữ chuẩn quốc tế</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Feature 1 -->
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 dark:bg-indigo-950/80 dark:text-indigo-400 flex items-center justify-center text-2xl mb-5">
+              🔊
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Phát Âm Bản Xứ AI</h3>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
+              Tích hợp giọng đọc US/UK cho từng từ vựng, phiên âm IPA và câu ví dụ, hỗ trợ chế độ nghe chậm 0.7x.
+            </p>
+            <button onclick="if(window.audioController){window.audioController.speak('Welcome to EduMaster English!')}else{const u=new SpeechSynthesisUtterance('Welcome to EduMaster English!');u.lang='en-US';speechSynthesis.speak(u);}" class="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 hover:underline">
+              <span>Thử nghe giọng đọc</span> 🔊
+            </button>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-600 dark:bg-teal-950/80 dark:text-teal-400 flex items-center justify-center text-2xl mb-5">
+              🎧
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Nghe & Điền Từ (Dictation)</h3>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
+              Luyện phản xạ nghe câu văn thực tế, bắt từ khóa và gõ chính tả giúp ghi nhớ từ vựng vào tiềm thức.
+            </p>
+            <a href="lessons.html" class="inline-flex items-center gap-1 text-xs font-bold text-teal-600 hover:underline">
+              <span>Luyện nghe ngay</span> →
+            </a>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 dark:bg-emerald-950/80 dark:text-emerald-400 flex items-center justify-center text-2xl mb-5">
+              🗂
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Flashcard 3D Spaced-Repetition</h3>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
+              Lật thẻ 3D trực quan, phân loại "Cần ôn lại" vs "Đã thuộc", tự động nhắc nhở ôn tập ngắt quãng.
+            </p>
+            <a href="flashcards.html" class="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 hover:underline">
+              <span>Trải nghiệm thẻ 3D</span> →
+            </a>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 dark:bg-amber-950/80 dark:text-amber-400 flex items-center justify-center text-2xl mb-5">
+              🏆
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Gamification & Quiz Tức Thì</h3>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
+              Tích lũy điểm EXP, chuỗi ngày học liên tục (Streak), huy hiệu vinh danh và phản hồi giải thích ngữ pháp.
+            </p>
+            <a href="progress.html" class="inline-flex items-center gap-1 text-xs font-bold text-amber-600 hover:underline">
+              <span>Xem thành tích</span> →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Placeholder (Rendered automatically by app.js) -->
+  <footer id="main-footer"></footer>
+
+  <!-- Core Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/audio.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

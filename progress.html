@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="vi" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tiến Độ Học Tập & Thành Tích | EduMaster English</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 500: '#6366f1', 600: '#4f46e5' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-[#f7f8f6] dark:bg-[#111722] text-slate-800 dark:text-slate-100 flex flex-col min-h-screen">
+
+  <header id="main-header"></header>
+
+  <main class="flex-grow py-8 sm:py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Page Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-8 mb-8 border-b border-slate-200 dark:border-slate-800 gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">Dashboard Cá Nhân</span>
+          <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Hồ Sơ & Thành Tích Học Tập</h1>
+          <p class="text-slate-500 text-sm mt-1">Theo dõi quá trình chinh phục các cấp độ CEFR và các phần thưởng đạt được</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="resetLearningData()" class="text-xs font-semibold px-4 py-2 rounded-xl border border-red-200 dark:border-red-900/60 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors">
+            Xóa dữ liệu học lại từ đầu ⚠️
+          </button>
+        </div>
+      </div>
+
+      <!-- Overview Stats Cards Grid -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+        
+        <!-- Level Card -->
+        <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-400 mb-2">
+            <span>CẤP ĐỘ HIỆN TẠI</span>
+            <span class="text-lg">🎯</span>
+          </div>
+          <div class="text-3xl font-black text-indigo-600 dark:text-indigo-400" id="stat-level">A1</div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2" id="stat-level-desc">Breakthrough - Căn bản</p>
+        </div>
+
+        <!-- XP Card -->
+        <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-400 mb-2">
+            <span>ĐIỂM KINH NGHIỆM</span>
+            <span class="text-lg">⚡</span>
+          </div>
+          <div class="text-3xl font-black text-amber-500" id="stat-xp">0 XP</div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Tích lũy từ bài học & quiz</p>
+        </div>
+
+        <!-- Streak Card -->
+        <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-400 mb-2">
+            <span>CHUỖI HỌC TẬP</span>
+            <span class="text-lg">🔥</span>
+          </div>
+          <div class="text-3xl font-black text-orange-500" id="stat-streak">1 Ngày</div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Học đều đặn mỗi ngày</p>
+        </div>
+
+        <!-- Mastered Vocab Card -->
+        <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-400 mb-2">
+            <span>TỪ VỰNG ĐÃ THUỘC</span>
+            <span class="text-lg">📚</span>
+          </div>
+          <div class="text-3xl font-black text-emerald-500" id="stat-vocab">0 Từ</div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Qua thẻ Flashcard 3D</p>
+        </div>
+
+      </div>
+
+      <!-- Two Columns: Completed Lessons & Badges -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+        
+        <!-- Left: Completed Lessons (7 cols) -->
+        <div class="lg:col-span-7 bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white">Lịch Sử Bài Học Đã Chinh Phục</h2>
+            <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400" id="completed-count">
+              0 bài học
+            </span>
+          </div>
+          <div class="space-y-3" id="completed-lessons-list">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Right: Badges & Certificate (5 cols) -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <!-- Badges Section -->
+          <div class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Huy Hiệu Thành Tích</h2>
+            <div class="grid grid-cols-2 gap-3" id="badges-grid">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <!-- Placement test result summary -->
+          <div class="bg-gradient-to-br from-indigo-50 to-slate-100 dark:from-slate-800/60 dark:to-slate-900 p-6 rounded-3xl border border-indigo-100 dark:border-slate-800" id="placement-summary-card">
+            <!-- Rendered by JS -->
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- CEFR Certificate Generator Simulation -->
+      <div class="bg-white dark:bg-slate-900 p-8 sm:p-12 rounded-3xl border-2 border-dashed border-indigo-200 dark:border-indigo-900/60 text-center max-w-3xl mx-auto shadow-sm">
+        <div class="w-16 h-16 rounded-full bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 mx-auto flex items-center justify-center text-3xl mb-4">
+          🎓
+        </div>
+        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Chứng Nhận Hoàn Thành Khóa Học</h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mb-6 max-w-md mx-auto">
+          Hoàn thành đủ các bài học và bài kiểm tra ở mỗi cấp độ để xuất chứng nhận năng lực theo chuẩn CEFR quốc tế.
+        </p>
+        <button onclick="previewCertificate()" class="px-6 py-3 rounded-xl bg-indigo-600 text-white font-bold text-sm shadow-md shadow-indigo-600/30 hover:bg-indigo-700 transition-colors">
+          Xem trước Chứng chỉ CEFR của bạn 📜
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <footer id="main-footer"></footer>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/audio.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProgressStats();
+    });
+
+    function renderProgressStats() {
+      if (!window.appStorage) return;
+      const state = window.appStorage.state;
+
+      // Stats
+      const levelEl = document.getElementById('stat-level');
+      if (levelEl) levelEl.textContent = state.userLevel || 'A1';
+
+      const levelInfo = window.CEFR_LEVELS[state.userLevel || 'A1'];
+      const descEl = document.getElementById('stat-level-desc');
+      if (descEl && levelInfo) descEl.textContent = levelInfo.name;
+
+      const xpEl = document.getElementById('stat-xp');
+      if (xpEl) xpEl.textContent = `${state.userXP} XP`;
+
+      const streakEl = document.getElementById('stat-streak');
+      if (streakEl) streakEl.textContent = `${state.streakDays} Ngày`;
+
+      const vocabMasteredCount = Object.values(state.flashcardMastery || {}).filter(Boolean).length;
+      const vocabEl = document.getElementById('stat-vocab');
+      if (vocabEl) vocabEl.textContent = `${vocabMasteredCount} Từ`;
+
+      // Completed Lessons
+      const completedList = document.getElementById('completed-lessons-list');
+      const completedCountEl = document.getElementById('completed-count');
+      if (completedCountEl) completedCountEl.textContent = `${state.completedLessons.length} bài học`;
+
+      if (completedList) {
+        if (state.completedLessons.length === 0) {
+          completedList.innerHTML = `
+            <div class="text-center py-8 text-slate-400 text-sm">
+              Bạn chưa hoàn thành bài học nào. Hãy truy cập <a href="lessons.html" class="text-indigo-600 font-semibold underline">Kho bài học</a> để bắt đầu ngay!
+            </div>
+          `;
+        } else {
+          completedList.innerHTML = state.completedLessons.map(id => {
+            const lesson = window.LESSONS_DATA.find(l => l.id === id);
+            const scoreData = state.quizScores[id];
+            if (!lesson) return '';
+            return `
+              <div class="p-4 rounded-2xl border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 flex items-center justify-between">
+                <div>
+                  <span class="text-xs font-bold px-2 py-0.5 rounded ${window.CEFR_LEVELS[lesson.level].badgeClass} mr-2">
+                    ${lesson.level}
+                  </span>
+                  <span class="font-bold text-sm text-slate-900 dark:text-white">${lesson.title}</span>
+                </div>
+                <div class="text-right">
+                  ${scoreData ? `<span class="text-xs text-emerald-600 font-bold block">Quiz: ${scoreData.score}/${scoreData.total}</span>` : ''}
+                  <a href="lessons.html?level=${lesson.level}&lesson=${lesson.id}" class="text-xs text-indigo-600 hover:underline">Học lại</a>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+
+      // Badges
+      const badgesContainer = document.getElementById('badges-grid');
+      const allBadges = [
+        { id: 'welcome', icon: '🌱', name: 'Khởi đầu mới', desc: 'Bắt đầu gia nhập cộng đồng' },
+        { id: 'placement_done', icon: '🎯', name: 'Xác định mục tiêu', desc: 'Hoàn thành bài Test đầu vào' },
+        { id: 'first_step', icon: '⭐', name: 'Bước đi đầu tiên', desc: 'Hoàn thành bài học đầu tiên' },
+        { id: 'diligent_student', icon: '📖', name: 'Học sinh chăm chỉ', desc: 'Hoàn thành từ 5 bài học' },
+        { id: 'streak_3', icon: '🔥', name: 'Kỷ luật thép', desc: 'Chuỗi 3 ngày học liên tiếp' },
+        { id: 'xp_master_300', icon: '👑', name: 'Chiến binh EXP', desc: 'Đạt trên 300 XP' }
+      ];
+
+      if (badgesContainer) {
+        badgesContainer.innerHTML = allBadges.map(b => {
+          const unlocked = state.badges.includes(b.id);
+          return `
+            <div class="p-3.5 rounded-2xl border ${unlocked ? 'border-amber-200 bg-amber-50/40 dark:border-amber-900/40 dark:bg-amber-950/20' : 'border-slate-100 dark:border-slate-800 bg-slate-50/30 opacity-40'} flex items-center gap-3">
+              <span class="text-2xl">${b.icon}</span>
+              <div>
+                <h4 class="text-xs font-bold text-slate-900 dark:text-white">${b.name}</h4>
+                <p class="text-[11px] text-slate-500">${b.desc}</p>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Placement summary card
+      const testSummary = document.getElementById('placement-summary-card');
+      if (testSummary) {
+        if (state.placementTest) {
+          testSummary.innerHTML = `
+            <div class="flex items-center justify-between mb-2">
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white">Kết quả Placement Test</h4>
+              <span class="text-xs text-slate-400">${state.placementTest.date}</span>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-300 mb-3">
+              Điểm số: <strong>${state.placementTest.score} / ${state.placementTest.total}</strong> câu đúng • Xếp lớp: <strong class="text-indigo-600">${state.placementTest.level}</strong>
+            </p>
+            <a href="placement-test.html" class="inline-block text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline">
+              Làm lại bài kiểm tra →
+            </a>
+          `;
+        } else {
+          testSummary.innerHTML = `
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white mb-1">Chưa làm bài Test đầu vào</h4>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">Hãy làm bài kiểm tra 15 câu để hệ thống xếp lớp chính xác cho bạn.</p>
+            <a href="placement-test.html" class="inline-block px-3 py-1.5 rounded-lg bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-700">
+              Làm bài Test ngay 🎯
+            </a>
+          `;
+        }
+      }
+    }
+
+    function previewCertificate() {
+      const state = window.appStorage.state;
+      const level = state.userLevel || 'A1';
+      const levelInfo = window.CEFR_LEVELS[level] || window.CEFR_LEVELS['A1'];
+
+      alert(`🎉 CHỨNG NHẬN ĐẠT CẤP ĐỘ CEFR\n------------------------------------\nHọc viên: Thành viên EduMaster English\nCấp độ đạt được: ${levelInfo.name}\nTổng điểm tích lũy: ${state.userXP} XP\nChuỗi học tập: ${state.streakDays} ngày liên tiếp\n\nChúc mừng bạn đã nỗ lực học tập xuất sắc!`);
+    }
+
+    function resetLearningData() {
+      if (confirm('Bạn có chắc chắn muốn đặt lại toàn bộ tiến độ học tập và điểm số không?')) {
+        window.appStorage.resetAllProgress();
+        renderProgressStats();
+        if (typeof updateHeaderStats === 'function') updateHeaderStats();
+        window.showToast('Đã đặt lại toàn bộ dữ liệu học tập!', 'info');
+      }
+    }
+  </script>
+</body>
+</html>
