@@ -1,0 +1,317 @@
+/* ==========================================================================
+   SOOTHING, EYE-COMFORT PALETTE & MODERN EDUCATIONAL UI DESIGN
+   Màu sắc dịu mắt, ấm áp, bảo vệ thị lực cho người học trong thời gian dài
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@600;700&display=swap');
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+
+  /* Bảng màu nhẹ nhàng dịu mắt (Calm Soft Paper / Warm Sage White) */
+  --bg-app: #f7f8f6;            /* Nền màu kem trắng dịu, không bị chói như trắng tinh */
+  --bg-card: #ffffff;
+  --bg-card-subtle: #f0f3ef;
+  --border-soft: #e2e7e1;
+  --border-focus: #6366f1;
+  --text-primary: #1f2937;      /* Xám than đậm nhẹ, dễ chịu hơn đen tuyền */
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+
+  /* Màu dấu mốc cấp độ (Tone pastel dịu mắt) */
+  --lvl-a1: #4f8cf6;
+  --lvl-a2: #10b981;
+  --lvl-b1: #f59e0b;
+  --lvl-b2: #8b5cf6;
+  --lvl-c1: #ec4899;
+  --lvl-c2: #ef4444;
+}
+
+.dark {
+  /* Chế độ tối dịu mắt (Calm Midnight Slate - không bị đen gắt) */
+  --bg-app: #111722;
+  --bg-card: #182232;
+  --bg-card-subtle: #1f2b3e;
+  --border-soft: #27354a;
+  --border-focus: #818cf8;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.35s ease, color 0.35s ease;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Typography */
+h1, h2, h3, .font-heading {
+  font-family: var(--font-display);
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+}
+
+/* Soothing Glassmorphism Effects */
+.glass {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(226, 231, 225, 0.85);
+}
+
+.dark .glass {
+  background: rgba(17, 23, 34, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(39, 53, 74, 0.7);
+}
+
+/* 3D Flashcard Flip Animation */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.flashcard-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.flashcard-front, .flashcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2.25rem;
+}
+
+.flashcard-back {
+  transform: rotateY(180deg);
+}
+
+/* Lesson Theory Formatting - Dễ đọc, thoáng đãng */
+.theory-content {
+  line-height: 1.85;
+  font-size: 1.025rem;
+  color: var(--text-secondary);
+}
+
+.theory-content h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: 1.75rem;
+  margin-bottom: 0.85rem;
+  color: #4338ca;
+}
+
+.dark .theory-content h3 {
+  color: #818cf8;
+}
+
+.theory-content p {
+  margin-bottom: 1rem;
+}
+
+.theory-content ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 1.25rem;
+}
+
+.theory-content li {
+  position: relative;
+  padding-left: 1.6rem;
+  margin-bottom: 0.65rem;
+}
+
+.theory-content li::before {
+  content: "•";
+  position: absolute;
+  left: 0.5rem;
+  color: #6366f1;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+/* Callout Box: Mẹo ghi nhớ & Cảnh báo lỗi sai */
+.theory-callout-tip {
+  background: #f0fdf4;
+  border-left: 4px solid #22c55e;
+  padding: 1rem 1.25rem;
+  border-radius: 0.85rem;
+  margin: 1.25rem 0;
+  color: #166534;
+}
+
+.dark .theory-callout-tip {
+  background: rgba(34, 197, 94, 0.12);
+  border-left-color: #4ade80;
+  color: #bbf7d0;
+}
+
+.theory-callout-warning {
+  background: #fffbeb;
+  border-left: 4px solid #f59e0b;
+  padding: 1rem 1.25rem;
+  border-radius: 0.85rem;
+  margin: 1.25rem 0;
+  color: #92400e;
+}
+
+.dark .theory-callout-warning {
+  background: rgba(245, 158, 11, 0.12);
+  border-left-color: #fbbf24;
+  color: #fde68a;
+}
+
+/* Table styling dịu nhẹ */
+.theory-content .table-container {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border-radius: 1rem;
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.theory-content table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.theory-content th {
+  background-color: rgba(240, 243, 239, 0.8);
+  padding: 0.85rem 1.15rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.dark .theory-content th {
+  background-color: #1f2b3e;
+  color: #e2e8f0;
+}
+
+.theory-content td {
+  padding: 0.85rem 1.15rem;
+  border-top: 1px solid var(--border-soft);
+  font-size: 0.95rem;
+}
+
+/* Interactive Quiz Options */
+.quiz-option {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
+}
+
+.quiz-option:hover:not(.disabled) {
+  transform: translateY(-2px);
+  border-color: #818cf8;
+}
+
+.quiz-option.selected {
+  border-color: #4f46e5;
+  background-color: #eef2ff;
+}
+
+.dark .quiz-option.selected {
+  border-color: #818cf8;
+  background-color: rgba(99, 102, 241, 0.18);
+}
+
+.quiz-option.correct {
+  border-color: #10b981 !important;
+  background-color: #ecfdf5 !important;
+  color: #065f46 !important;
+}
+
+.dark .quiz-option.correct {
+  background-color: rgba(16, 185, 129, 0.2) !important;
+  color: #6ee7b7 !important;
+}
+
+.quiz-option.incorrect {
+  border-color: #ef4444 !important;
+  background-color: #fef2f2 !important;
+  color: #991b1b !important;
+}
+
+.dark .quiz-option.incorrect {
+  background-color: rgba(239, 68, 68, 0.2) !important;
+  color: #fca5a5 !important;
+}
+
+/* Toast Notifications */
+#toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  min-width: 280px;
+  max-width: 380px;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Custom Scrollbar - Thanh cuộn mảnh mượt mà */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
