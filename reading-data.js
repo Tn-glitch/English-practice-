@@ -1,106 +1,148 @@
-/** READING DATA — Collection of random reading passages with comprehension questions.
- *  Structure: { id, level, title, text, questions: [{ question, options[], correct(0-based idx), explanation }] }
+/**
+ * READING DATA: Ngân hàng các đoạn văn luyện đọc hiểu chuẩn CEFR A1 - C2
  */
-const READING_PASSAGES = [
-  // ─── A1 ───────────────────────────────────────────────────────────────────
+window.READING_PASSAGES = [
   {
-    id: 'r01', level: 'A1', title: 'A Day at the Market',
-    text: `Today I went to the local market with my mother. It was a busy place with many stalls selling fresh fruits, vegetables, and handmade crafts. We bought apples, carrots, and a beautiful knitted scarf. The vendor smiled and thanked us. On the way home, we ate an ice cream under a big tree. It was a wonderful day.`,
+    id: 'r1',
+    level: 'A1',
+    title: 'A Day at the Local Market',
+    text: `Today is Saturday. I go to the local market with my mother. The market is very crowded with many people. 
+There are colourful stalls selling fresh fruits, green vegetables, and delicious bread. I buy two red apples and a bottle of milk. The vendor is very kind and gives me a small orange for free. We smile and say thank you before walking back home.`,
     questions: [
-      { question: 'Who did the speaker go to the market with?', options: ['A friend','Their father','Their mother','Their sister'], correct: 2, explanation: 'The passage says "I went to the local market with my mother."' },
-      { question: 'What did they buy at the market?', options: ['Fish, bread, and milk','Apples, carrots, and a scarf','Oranges, potatoes, and a hat','Mangoes, beans, and gloves'], correct: 1, explanation: 'They bought apples, carrots, and a knitted scarf.' },
-      { question: 'What did they do on the way home?', options: ['Took a bus','Ate ice cream under a tree','Bought more vegetables','Called a friend'], correct: 2, explanation: '"We ate an ice cream under a big tree."' },
+      {
+        question: 'Who does the writer go to the market with?',
+        options: ['His father', 'His mother', 'His teacher', 'His friend'],
+        correct: 1,
+        explanation: 'Bài đọc viết: "I go to the local market with my mother."'
+      },
+      {
+        question: 'What does the writer buy?',
+        options: ['Apples and milk', 'Bread and fish', 'Oranges and bananas', 'Tea and cakes'],
+        correct: 0,
+        explanation: 'Bài đọc viết: "I buy two red apples and a bottle of milk."'
+      },
+      {
+        question: 'What does the kind vendor give for free?',
+        options: ['A red apple', 'A bottle of milk', 'A small orange', 'A loaf of bread'],
+        correct: 2,
+        explanation: 'Bài đọc viết: "The vendor is very kind and gives me a small orange for free."'
+      }
     ]
   },
   {
-    id: 'r02', level: 'A1', title: 'My Bedroom',
-    text: `My bedroom is small but cozy. There is a bed, a desk, and a bookshelf. I have a blue lamp on my desk. My favorite toy, a teddy bear, sits on my pillow every night. The walls are light yellow. I love my bedroom because it is quiet and warm.`,
+    id: 'r2',
+    level: 'A2',
+    title: 'A Memorable Trip to Da Nang',
+    text: `Last summer, my family spent four days visiting Da Nang, a beautiful coastal city in Vietnam. 
+We stayed at a hotel right near My Khe beach. In the morning, we woke up early to watch the stunning sunrise and swam in the cool ocean water. 
+On the second day, we visited Ba Na Hills and walked across the famous Golden Bridge held by two giant stone hands. In the evenings, we enjoyed local dishes like Mi Quang and grilled seafood. It was an unforgettable trip for all of us.`,
     questions: [
-      { question: 'What color is the lamp?', options: ['Red','Green','Blue','Yellow'], correct: 2, explanation: '"I have a blue lamp on my desk."' },
-      { question: 'Where does the teddy bear sit?', options: ['On the desk','On the bookshelf','On the pillow','On the floor'], correct: 2, explanation: '"My favorite toy, a teddy bear, sits on my pillow every night."' },
-      { question: 'Why does the speaker love the bedroom?', options: ['It is big and colorful','It is quiet and warm','It has a large window','It has many toys'], correct: 1, explanation: '"I love my bedroom because it is quiet and warm."' },
-    ]
-  },
-
-  // ─── A2 ───────────────────────────────────────────────────────────────────
-  {
-    id: 'r03', level: 'A2', title: 'The Busy Train Station',
-    text: `Yesterday the city train station was full of travelers. Loud announcements echoed through the halls, and people hurried to catch their trains. A young man helped an elderly woman with her heavy luggage. Suddenly the rain started, but everyone quickly rushed inside. A little girl lost her hat in the wind and began to cry, but a kind stranger found it and returned it to her.`,
-    questions: [
-      { question: 'What did the young man do?', options: ['He sang a song','He helped an elderly woman with her luggage','He bought a train ticket','He waited for a friend'], correct: 1, explanation: 'The young man helped an elderly woman with her heavy luggage.' },
-      { question: 'What happened to the little girl?', options: ['She lost her ticket','She lost her hat','She missed her train','She dropped her bag'], correct: 1, explanation: '"A little girl lost her hat in the wind."' },
-      { question: 'Who returned the hat?', options: ['The young man','The elderly woman','A kind stranger','The announcer'], correct: 2, explanation: '"A kind stranger found it and returned it to her."' },
-    ]
-  },
-  {
-    id: 'r04', level: 'A2', title: 'Learning to Cook',
-    text: `Last Saturday I decided to cook dinner for my family. I chose a simple pasta recipe. First, I boiled water and added salt. Then I cooked the pasta for ten minutes. I made a tomato sauce with garlic and basil. My little brother helped me cut the vegetables. When we served the food, everyone said it was delicious. My mother was very proud of me.`,
-    questions: [
-      { question: 'What dish did the speaker cook?', options: ['Pizza','Pasta','Soup','Rice'], correct: 1, explanation: '"I chose a simple pasta recipe."' },
-      { question: 'Who helped cut the vegetables?', options: ['The mother','The father','The little brother','A friend'], correct: 2, explanation: '"My little brother helped me cut the vegetables."' },
-      { question: 'How did the family react to the food?', options: ['They said it was bad','They did not eat it','They said it was delicious','They ordered takeout instead'], correct: 2, explanation: '"Everyone said it was delicious."' },
-    ]
-  },
-
-  // ─── B1 ───────────────────────────────────────────────────────────────────
-  {
-    id: 'r05', level: 'B1', title: 'The Benefits of Reading',
-    text: `Reading is one of the most beneficial habits a person can develop. It not only expands your vocabulary but also improves your ability to concentrate and think critically. Studies have shown that people who read regularly tend to have better memory and lower levels of stress. Fiction allows readers to experience different perspectives and build empathy, while non-fiction provides factual knowledge and practical skills. Even reading for just 20 minutes a day can have a significant positive impact on the brain.`,
-    questions: [
-      { question: 'According to the passage, which of the following is NOT a benefit of reading?', options: ['Better memory','Improved concentration','Higher stress levels','Expanded vocabulary'], correct: 2, explanation: 'The passage says reading leads to "lower levels of stress," not higher.' },
-      { question: 'What does reading fiction help readers develop?', options: ['Mathematical skills','Empathy and different perspectives','Speed reading techniques','Better handwriting'], correct: 1, explanation: '"Fiction allows readers to experience different perspectives and build empathy."' },
-      { question: 'How long should a person read daily to see benefits?', options: ['At least one hour','At least 30 minutes','Just 20 minutes','5 minutes'], correct: 2, explanation: '"Reading for just 20 minutes a day can have a significant positive impact."' },
+      {
+        question: 'How long did the family stay in Da Nang?',
+        options: ['Two days', 'Three days', 'Four days', 'One week'],
+        correct: 2,
+        explanation: 'Bài đọc viết: "...family spent four days visiting Da Nang..."'
+      },
+      {
+        question: 'What famous place did they visit on the second day?',
+        options: ['Hoi An Ancient Town', 'Ba Na Hills and the Golden Bridge', 'Son Tra Peninsula', 'Marble Mountains'],
+        correct: 1,
+        explanation: 'Bài đọc viết: "On the second day, we visited Ba Na Hills and walked across the famous Golden Bridge..."'
+      },
+      {
+        question: 'Which local specialty dish is mentioned?',
+        options: ['Pho Bo', 'Mi Quang', 'Bun Cha', 'Banh Mi'],
+        correct: 1,
+        explanation: 'Bài đọc viết: "...we enjoyed local dishes like Mi Quang and grilled seafood."'
+      }
     ]
   },
   {
-    id: 'r06', level: 'B1', title: 'A Summer Internship',
-    text: `Last summer, Maria applied for an internship at a marketing company in the city. Although she was nervous at first, she quickly adapted to the fast-paced environment. Her main tasks included writing social media posts, analysing customer data, and attending weekly team meetings. By the end of the programme, Maria had gained valuable experience and made several professional contacts. She was even offered a part-time position, which she accepted immediately.`,
+    id: 'r3',
+    level: 'B1',
+    title: 'The Habit of Daily Reading',
+    text: `Developing a habit of reading daily provides numerous intellectual and emotional benefits. 
+First, reading exposes individuals to rich vocabulary and diverse grammatical structures, which naturally enhances both spoken and written communication skills. 
+Second, immersing oneself in a compelling book encourages deep focus, offering a healthy break from constant smartphone notifications and digital distractions. 
+Finally, reading literature fosters empathy by allowing readers to experience life through the perspectives of characters from entirely different backgrounds and cultures. Just twenty minutes of reading every evening can significantly reduce daily stress and stimulate mental sharpness.`,
     questions: [
-      { question: 'What type of company did Maria intern at?', options: ['A technology firm','A marketing company','A law firm','A publishing house'], correct: 1, explanation: '"She applied for an internship at a marketing company."' },
-      { question: 'Which of the following was NOT one of Maria\'s tasks?', options: ['Writing social media posts','Analysing customer data','Designing product packaging','Attending team meetings'], correct: 2, explanation: 'The passage lists writing posts, analysing data, and attending meetings — not designing packaging.' },
-      { question: 'What happened at the end of the internship?', options: ['She was dismissed','She quit the internship','She was offered a part-time position','She started her own company'], correct: 2, explanation: '"She was even offered a part-time position, which she accepted immediately."' },
+      {
+        question: 'What is mentioned as a major communication benefit of daily reading?',
+        options: ['It improves handwriting', 'It exposes readers to rich vocabulary and grammar', 'It teaches people how to speak faster', 'It replaces school textbooks'],
+        correct: 1,
+        explanation: 'Bài đọc viết: "...reading exposes individuals to rich vocabulary and diverse grammatical structures, which naturally enhances both spoken and written communication skills."'
+      },
+      {
+        question: 'How does reading help people manage digital distractions?',
+        options: ['By encouraging deep focus away from smartphone alerts', 'By teaching people to build mobile apps', 'By making digital screens brighter', 'By turning off the Internet'],
+        correct: 0,
+        explanation: 'Bài đọc viết: "...encourages deep focus, offering a healthy break from constant smartphone notifications..."'
+      },
+      {
+        question: 'According to the passage, reading literature helps build empathy because:',
+        options: ['It gives readers practical financial tips', 'It allows people to view life through different characters perspectives', 'It teaches historical dates', 'It requires memorizing poems'],
+        correct: 1,
+        explanation: 'Bài đọc viết: "...reading literature fosters empathy by allowing readers to experience life through the perspectives of characters from entirely different backgrounds..."'
+      }
     ]
   },
-
-  // ─── B2 ───────────────────────────────────────────────────────────────────
   {
-    id: 'r07', level: 'B2', title: 'The Digital Divide',
-    text: `The digital divide refers to the gap between individuals who have access to modern information and communication technologies and those who do not. While urban populations in developed countries enjoy high-speed internet and the latest devices, millions of people in rural and less economically developed regions remain disconnected. This disparity not only limits educational and employment opportunities but also hampers participation in the digital economy. Governments and non-governmental organisations have launched various initiatives to bridge this gap, including subsidised internet programmes and community technology centres. However, infrastructure challenges and affordability issues continue to slow progress.`,
+    id: 'r4',
+    level: 'B2',
+    title: 'Artificial Intelligence in Education',
+    text: `The integration of Artificial Intelligence (AI) into modern education is fundamentally transforming how students acquire knowledge and how instructors teach. 
+Adaptive learning platforms leverage algorithms to analyze individual learning paces, strengths, and weaknesses, automatically delivering personalized exercises tailored to each learner's needs. 
+Furthermore, intelligent tutoring systems provide immediate feedback, enabling students to correct mistakes and grasp difficult concepts without waiting for classroom reviews. 
+However, educational experts emphasize that AI should complement, rather than substitute, human teachers. Critical thinking, creative problem-solving, and emotional encouragement remain distinctly human capabilities that algorithms cannot duplicate.`,
     questions: [
-      { question: 'What is the "digital divide"?', options: ['The difference in internet speeds between countries','The gap between those with and without access to technology','A new type of computer software','A political debate about social media'], correct: 1, explanation: '"The digital divide refers to the gap between individuals who have access to modern technology and those who do not."' },
-      { question: 'Which consequence of the digital divide is mentioned in the passage?', options: ['Environmental pollution','Limited educational and employment opportunities','Political instability','Increased crime rates'], correct: 1, explanation: '"This disparity not only limits educational and employment opportunities…"' },
-      { question: 'What challenge continues to slow progress in bridging the divide?', options: ['Lack of political interest','Infrastructure and affordability issues','Language barriers','Overpopulation in cities'], correct: 2, explanation: '"Infrastructure challenges and affordability issues continue to slow progress."' },
+      {
+        question: 'What is the primary function of adaptive learning platforms described in the text?',
+        options: ['Grading national entrance exams', 'Analyzing learning paces to deliver personalized exercises', 'Replacing teachers in rural schools', 'Producing printed textbooks'],
+        correct: 1,
+        explanation: 'Bài đọc viết: "Adaptive learning platforms leverage algorithms to analyze individual learning paces... automatically delivering personalized exercises..."'
+      },
+      {
+        question: 'Why do intelligent tutoring systems benefit learners?',
+        options: ['They provide immediate feedback to correct misconceptions', 'They eliminate homework completely', 'They reduce school hours to half', 'They make tests optional'],
+        correct: 0,
+        explanation: 'Bài đọc viết: "...intelligent tutoring systems provide immediate feedback, enabling students to correct mistakes and grasp difficult concepts..."'
+      },
+      {
+        question: 'What do experts conclude regarding human teachers in the age of AI?',
+        options: ['They will be entirely replaced within five years', 'AI should assist rather than replace them because human empathy and critical thinking are irreplaceable', 'They should focus only on administrative tasks', 'They no longer need to prepare lesson plans'],
+        correct: 1,
+        explanation: 'Bài đọc viết: "...AI should complement, rather than substitute, human teachers. Critical thinking, creative problem-solving, and emotional encouragement remain distinctly human capabilities..."'
+      }
     ]
   },
   {
-    id: 'r08', level: 'B2', title: 'Artificial Intelligence in Healthcare',
-    text: `Artificial intelligence is rapidly transforming the healthcare sector, offering unprecedented opportunities for improving patient outcomes. Machine learning algorithms can analyse vast quantities of medical data to detect diseases, such as cancer, at earlier stages than traditional methods. AI-powered diagnostic tools are also reducing the burden on overworked medical professionals by automating routine assessments. Nevertheless, ethical concerns remain regarding data privacy, algorithmic bias, and the potential erosion of the human element in patient care. Regulators are working to establish frameworks that balance innovation with patient safety.`,
+    id: 'r5',
+    level: 'C1',
+    title: 'The Paradox of Choice in Modern Consumerism',
+    text: `In contemporary consumer culture, the proliferation of available options is widely celebrated as the pinnacle of individual liberty and autonomy. 
+Whether selecting a healthcare plan, purchasing household electronics, or deciding on a university major, individuals face an unprecedented array of alternatives. 
+Nevertheless, psychological research spearheaded by Barry Schwartz reveals that excessive choice frequently induces cognitive paralysis and heightened anxiety rather than liberation. 
+When confronted with hundreds of competing options, decision-makers experience elevated opportunity costs and persistent regret, often suspecting that an unchosen alternative would have yielded superior satisfaction. 
+Consequently, streamlining choices and adopting a 'satisficing' mentality—accepting an option that meets one's core criteria rather than ceaselessly seeking perfection—proves crucial for long-term psychological well-being.`,
     questions: [
-      { question: 'What is one advantage of AI in healthcare mentioned in the passage?', options: ['Replacing all human doctors','Detecting diseases earlier than traditional methods','Eliminating the need for hospitals','Reducing the cost of medicines'], correct: 1, explanation: '"Machine learning algorithms can detect diseases at earlier stages than traditional methods."' },
-      { question: 'What ethical concern is NOT mentioned in the passage?', options: ['Data privacy','Algorithmic bias','Erosion of the human element','Financial cost of AI systems'], correct: 3, explanation: 'The passage mentions privacy, bias, and the human element — but not the financial cost of AI.' },
-      { question: 'What are regulators doing about AI in healthcare?', options: ['Banning its use entirely','Ignoring the issue','Establishing frameworks to balance innovation and safety','Handing control to private companies'], correct: 2, explanation: '"Regulators are working to establish frameworks that balance innovation with patient safety."' },
+      {
+        question: 'What is the conventional assumption regarding having numerous choices?',
+        options: ['It causes immediate economic inflation', 'It represents the pinnacle of personal liberty and autonomy', 'It leads to poor quality manufactured goods', 'It decreases corporate competition'],
+        correct: 1,
+        explanation: 'Bài đọc viết: "...the proliferation of available options is widely celebrated as the pinnacle of individual liberty and autonomy."'
+      },
+      {
+        question: 'According to Barry Schwartz, what is the negative psychological outcome of overwhelming choice?',
+        options: ['Total indifference to quality', 'Cognitive paralysis, heightened anxiety, and persistent regret', 'Increased physical exhaustion', 'Aggressive consumer protests'],
+        correct: 1,
+        explanation: 'Bài đọc viết: "...excessive choice frequently induces cognitive paralysis and heightened anxiety rather than liberation... elevated opportunity costs and persistent regret..."'
+      },
+      {
+        question: 'What does a "satisficing" mentality entail in the passage?',
+        options: ['Demanding absolute perfection in every purchase', 'Refusing to make any financial purchases', 'Settling for an option that satisfies core criteria rather than pursuing elusive perfection', 'Delegating all decisions to algorithms'],
+        correct: 2,
+        explanation: 'Bài đọc viết: "...accepting an option that meets one\'s core criteria rather than ceaselessly seeking perfection..."'
+      }
     ]
-  },
-
-  // ─── C1 ───────────────────────────────────────────────────────────────────
-  {
-    id: 'r09', level: 'C1', title: 'The Psychology of Procrastination',
-    text: `Procrastination is often misconstrued as laziness, yet psychological research reveals a far more nuanced picture. At its core, procrastination is an emotional regulation problem: individuals delay tasks not because they lack the will to work, but because beginning a task triggers negative emotions — anxiety, self-doubt, boredom — which the brain instinctively seeks to escape by pursuing more immediately gratifying activities. Paradoxically, the relief gained from avoidance is short-lived, and the mounting guilt and anxiety of unfinished work ultimately amplify the very emotions one sought to escape. Cognitive behavioural strategies, such as breaking tasks into smaller components and practising self-compassion, have demonstrated efficacy in disrupting this cycle.`,
-    questions: [
-      { question: 'According to the passage, what is procrastination fundamentally rooted in?', options: ['Laziness and poor work ethic','Emotional regulation difficulties','A lack of intelligence','Poor time-management skills'], correct: 1, explanation: '"Procrastination is an emotional regulation problem." ' },
-      { question: 'What irony does the author point out about avoidance behaviour?', options: ['It makes tasks easier to complete','The relief is temporary and amplifies negative emotions later','It always leads to better creative output','It is an effective long-term strategy'], correct: 1, explanation: '"The relief gained from avoidance is short-lived, and mounting guilt amplifies the very emotions one sought to escape."' },
-      { question: 'Which strategy is cited as effective in addressing procrastination?', options: ['Strict deadlines imposed by others','Eliminating all leisure activities','Self-compassion and breaking tasks into smaller parts','Working longer hours'], correct: 2, explanation: '"Breaking tasks into smaller components and practising self-compassion have demonstrated efficacy."' },
-    ]
-  },
-
-  // ─── C2 ───────────────────────────────────────────────────────────────────
-  {
-    id: 'r10', level: 'C2', title: 'The Paradox of Choice',
-    text: `In contemporary consumer society, the proliferation of options is commonly assumed to be an unambiguous good — an emblem of freedom and self-determination. Yet psychologist Barry Schwartz, in his seminal work on the subject, argues compellingly that an excess of choice can paradoxically undermine both decision-making efficacy and subjective wellbeing. When confronted with an overwhelming array of alternatives, individuals frequently experience "choice overload," a cognitive state characterised by decision paralysis, diminished satisfaction with the chosen option, and heightened regret over unchosen alternatives. Schwartz distinguishes between "maximisers," who compulsively seek the optimal choice, and "satisficers," who settle for a sufficiently good option. The former group, he contends, consistently report lower levels of happiness, as the very act of maximising amplifies the psychological cost of every decision.`,
-    questions: [
-      { question: 'What does Barry Schwartz argue about an abundance of choices?', options: ['It always leads to better decisions','It paradoxically reduces wellbeing and decision quality','It is the foundation of a healthy democracy','It only affects people with low intelligence'], correct: 1, explanation: '"An excess of choice can paradoxically undermine both decision-making efficacy and subjective wellbeing."' },
-      { question: 'What is "choice overload" characterised by?', options: ['Rapid and confident decision-making','Satisfaction with any option chosen','Decision paralysis and heightened regret','Indifference to available alternatives'], correct: 2, explanation: '"Choice overload" is characterised by "decision paralysis, diminished satisfaction, and heightened regret over unchosen alternatives."' },
-      { question: 'According to Schwartz, which group reports lower happiness?', options: ['Satisficers, who accept good-enough options','Maximisers, who seek the optimal choice','People with fewer choices','People who avoid making choices'], correct: 1, explanation: '"The maximiser group consistently report lower levels of happiness, as maximising amplifies the psychological cost of every decision."' },
-    ]
-  },
+  }
 ];
